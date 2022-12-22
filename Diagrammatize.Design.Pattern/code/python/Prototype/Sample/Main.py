@@ -1,14 +1,13 @@
 from framework.Manager import Manager
-from framework.Product import Product
 from UnderlinePen import UnderlinePen
 from MessageBox import MessageBox
 
 def main():
     # 准备
-    manager = new Manager()
-    upen = new UnderlinePen('~')
-    mbox = new MessageBox('*')
-    sbox = new MessageBox('/')
+    manager = Manager()
+    upen = UnderlinePen('~')
+    mbox = MessageBox('*')
+    sbox = MessageBox('/')
     manager.register("strong message", upen)
     manager.register("warning box", mbox)
     manager.register("slash box", sbox)
@@ -20,3 +19,6 @@ def main():
     p2.use("Hello, world.")
     p3 = manager.create("slash box")
     p3.use("Hello, world.")
+
+if __name__ == "__main__":
+    main()
