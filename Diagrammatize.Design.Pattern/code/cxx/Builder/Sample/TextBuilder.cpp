@@ -5,7 +5,7 @@ TextBuilder::~TextBuilder() {
 
 void TextBuilder::makeTitle(const std::string& title) {     // 纯文本的标题
     buffer << "==============================\n";               // 装饰线
-    buffer << "『" + title + "』\n";                            // 为标题添加『』
+    buffer << "『" << title << "』\n";                          // 为标题添加『』
     buffer << "\n";                                             // 换行
 }
 
