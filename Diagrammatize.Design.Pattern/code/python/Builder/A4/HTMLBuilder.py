@@ -11,21 +11,19 @@ class HTMLBuilder:
             self.writer = open(self.filename, 'w')    # 生成 writer
         except:
             traceback.print_exc()
+            raise
             
         print("<html><head><title>" + title + "</title></head><body>", file=self.writer)    # 输出标题
         print("<h1>" + title + "</h1>", file=self.writer)
 
-
     def makeString(self, str_):                     # HTML文件中的字符串
         print("<p>" + str_ + "</p>", file=self.writer)      # 用<p>标签输出
-
 
     def makeItems(self, items):                     # HTML文件中的条目
         print("<ul>", file=self.writer)                     # 用<ul>和<li>输出
         for i in range(len(items)):
             print("<li>" + items[i] + "</li>", file=self.writer)
         print("</ul>", file=self.writer)
-
 
     def close(self):                        # 完成文档
         print("</body></html>", file=self.writer)   # 关闭标签

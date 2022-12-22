@@ -19,7 +19,7 @@ void MarkdownBuilder::makeTitle(const std::string& title) {                 // M
 }
 
 void MarkdownBuilder::makeString(const std::string& str) {                  // Markdown文件中的字符串
-    writer << "> " << str << '\n';                                   // 用<p>标签输出
+    writer << "> " << str << '\n';
     writer << '\n';
 }
 

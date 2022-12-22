@@ -22,8 +22,8 @@ def main():
         htmlbuilder = HTMLBuilder()
         director = Director(htmlbuilder)
         director.construct()
-        filename = htmlbuilder.getResult();
-        print(filename + "文件编写完成。");
+        filename = htmlbuilder.getResult()
+        print(filename + "文件编写完成。")
     else:
         usage()
         sys.exit(0)

@@ -8,7 +8,6 @@ class TextBuilder:
         self.buffer += "『" + title + "』\n"                    # 为标题加上『』
         self.buffer += "\n"                                     # 换行
 
-
     def makeString(self, str_):                         # 纯文本的字符串
         self.buffer += "■" + str_ + "\n"                        # 为字符串添加■
         self.buffer += "\n"                                     # 换行
