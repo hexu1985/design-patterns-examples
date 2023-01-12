@@ -10,8 +10,8 @@ class Visitor
 {
 public:
     virtual ~Visitor();
-    virtual void Visit(ConcreteElementA* elm) = 0;
-    virtual void Visit(ConcreteElementB* elm) = 0;
+    virtual void VisitConcreteElementA(Element* elm) = 0;
+    virtual void VisitConcreteElementB(Element* elm) = 0;
 
 protected:
     Visitor();
@@ -24,8 +24,8 @@ class ConcreteVisitorA:public Visitor
 public:
     ConcreteVisitorA();
     virtual ~ConcreteVisitorA();
-    virtual void Visit(ConcreteElementA* elm);
-    virtual void Visit(ConcreteElementB* elm);
+    virtual void VisitConcreteElementA(Element* elm);
+    virtual void VisitConcreteElementB(Element* elm);
 
 protected:
 private:
@@ -36,8 +36,8 @@ class ConcreteVisitorB:public Visitor
 public:
     ConcreteVisitorB();
     virtual ~ConcreteVisitorB();
-    virtual void Visit(ConcreteElementA* elm);
-    virtual void Visit(ConcreteElementB* elm);
+    virtual void VisitConcreteElementA(Element* elm);
+    virtual void VisitConcreteElementB(Element* elm);
 
 protected:
 private:

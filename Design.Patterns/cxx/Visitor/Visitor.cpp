@@ -1,6 +1,7 @@
 //Visitor.cpp
 #include "Visitor.h"
 #include "Element.h"
+
 #include <iostream>
 
 using namespace std;
@@ -21,14 +22,14 @@ ConcreteVisitorA::~ConcreteVisitorA()
 {
 }
 
-void ConcreteVisitorA::Visit(ConcreteElementA* elm)
+void ConcreteVisitorA::VisitConcreteElementA(Element* elm)
 {
-    cout << "ConcreteVisitorA: i will visit ConcreteElementA..." << endl;
+    cout << "i will visit ConcreteElementA..." << endl;
 }
 
-void ConcreteVisitorA::Visit(ConcreteElementB* elm)
+void ConcreteVisitorA::VisitConcreteElementB(Element* elm)
 {
-    cout << "ConcreteVisitorA: i will visit ConcreteElementB..." << endl;
+    cout << "i will visit ConcreteElementB..." << endl;
 }
 
 ConcreteVisitorB::ConcreteVisitorB()
@@ -39,12 +40,13 @@ ConcreteVisitorB::~ConcreteVisitorB()
 {
 }
 
-void ConcreteVisitorB::Visit(ConcreteElementA* elm)
+void ConcreteVisitorB::VisitConcreteElementA(Element* elm)
 {
-    cout << "ConcreteVisitorB: i will visit ConcreteElementA..." << endl;
-}
+    cout << "i will visit ConcreteElementA..." << endl;
+} 
 
-void ConcreteVisitorB::Visit(ConcreteElementB* elm)
+void
+ConcreteVisitorB::VisitConcreteElementB(Element* elm)
 {
-    cout << "ConcreteVisitorB: i will visit ConcreteElementB..." << endl;
+    cout << "i will visit ConcreteElementB..." << endl;
 }

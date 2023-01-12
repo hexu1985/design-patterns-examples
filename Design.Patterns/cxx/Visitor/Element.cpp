@@ -27,8 +27,8 @@ ConcreteElementA::~ConcreteElementA()
 
 void ConcreteElementA::Accept(Visitor* vis)
 {
+    vis->VisitConcreteElementA(this);
     cout << "visiting ConcreteElementA..." << endl;
-    vis->Visit(this);
 }
 
 ConcreteElementB::ConcreteElementB()
@@ -41,6 +41,6 @@ ConcreteElementB::~ConcreteElementB()
 
 void ConcreteElementB::Accept(Visitor* vis)
 {
+    vis->VisitConcreteElementB(this);
     cout << "visiting ConcreteElementB..." << endl;
-    vis->Visit(this);
 }
