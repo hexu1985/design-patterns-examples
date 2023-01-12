@@ -13,5 +13,5 @@ class BookShelf:
         return len(self.books)
 
     def __iter__(self):
-        return self.books.__iter__()
+        return iter(self.books)
 
