@@ -11,9 +11,7 @@ private:
     std::vector<Book*> books;
 
 public:
-    BookShelf(int maxsize) {
-        books.reserve(maxsize);
-    }
+    BookShelf() {}
 
     Book* getBookAt(int index) {
         return books[index];
