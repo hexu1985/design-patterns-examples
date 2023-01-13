@@ -1,6 +1,8 @@
 import traceback
 
-class MarkdownBuilder:
+from Builder import Builder
+
+class MarkdownBuilder(Builder):
     def __init__(self):
         self.filename = ''          # 文件名
         self.writer = None          # 用于编写文件的writer

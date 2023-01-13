@@ -1,6 +1,8 @@
 import traceback
 
-class HTMLBuilder:
+from Builder import Builder
+
+class HTMLBuilder(Builder):
     def __init__(self):
         self.filename = ''          # 文件名
         self.writer = None          # 用于编写文件的writer

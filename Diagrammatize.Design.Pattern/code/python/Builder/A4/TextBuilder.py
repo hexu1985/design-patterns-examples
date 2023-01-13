@@ -1,5 +1,8 @@
+import io
 
-class TextBuilder:
+from Builder import Builder
+
+class TextBuilder(Builder):
     def __init__(self):
         self.buffer = ''       # 文档内容保存在该字段中 
 

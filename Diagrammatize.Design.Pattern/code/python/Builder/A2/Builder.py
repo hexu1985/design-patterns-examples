@@ -1,4 +1,6 @@
-class Builder:
+import abc
+
+class Builder(abc.ABC):
     def __init__(self):
         self.initialized = False
 
@@ -19,14 +21,18 @@ class Builder:
         if self.initialized:
             self.buildDone()
 
+    @abc.abstractmethod
     def buildTitle(self, title):
         pass
 
+    @abc.abstractmethod
     def buildString(self, str_):
         pass
 
+    @abc.abstractmethod
     def buildItems(self, items):
         pass
 
+    @abc.abstractmethod
     def buildDone(self):
         pass
