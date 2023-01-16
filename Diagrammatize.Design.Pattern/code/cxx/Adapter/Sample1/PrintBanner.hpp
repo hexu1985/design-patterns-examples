@@ -3,7 +3,7 @@
 #include "Banner.hpp"
 #include "Print.hpp"
 
-class PrintBanner: protected Banner, public Print {
+class PrintBanner: private Banner, public Print {
 public:
     PrintBanner(const std::string& string);
     ~PrintBanner() override;
