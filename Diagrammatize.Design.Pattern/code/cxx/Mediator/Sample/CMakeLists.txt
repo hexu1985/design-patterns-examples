@@ -15,7 +15,7 @@ endif()
 
 find_package(Qt5 COMPONENTS Widgets REQUIRED)
 
-add_executable(hello 
+add_executable(Mediator 
     Mediator.hpp
     Mediator.cpp
     Colleague.hpp
@@ -30,4 +30,4 @@ add_executable(hello
     LoginFrame.cpp
     Main.cpp)
 
-target_link_libraries(hello Qt5::Widgets)
+target_link_libraries(Mediator Qt5::Widgets)

@@ -1,6 +1,6 @@
 #include "ColleagueCheckbox.hpp"
 
-ColleagueCheckbox::ColleagueCheckbox(const std::string& caption, QWidget *parent): QCheckBox(caption.c_str(), parent) 
+ColleagueCheckbox::ColleagueCheckbox(const std::string& caption, QWidget *parent): QRadioButton(caption.c_str(), parent) 
 {}
 
 ColleagueCheckbox::~ColleagueCheckbox() {}

@@ -1,12 +1,12 @@
 #pragma once
 
-#include <QCheckBox>
+#include <QRadioButton>
 
 #include "Colleague.hpp"
 
 class Mediator;
 
-class ColleagueCheckbox: public QCheckBox, public Colleague {
+class ColleagueCheckbox: public QRadioButton, public Colleague {
 public:
     Q_OBJECT
 
