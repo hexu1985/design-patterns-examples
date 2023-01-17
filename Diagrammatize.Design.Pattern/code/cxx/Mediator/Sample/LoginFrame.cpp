@@ -21,6 +21,9 @@ LoginFrame::LoginFrame(const std::string& title, QWidget *parent): QWidget(paren
     gridLayout->addWidget(buttonCancel, 3, 1);
 
     setLayout(gridLayout);
+
+    // 设置初始的启用起用/禁用状态
+    colleagueChanged();
 }
 
 LoginFrame::~LoginFrame() {}
@@ -29,8 +32,8 @@ LoginFrame::~LoginFrame() {}
 void LoginFrame::createColleagues() {
     // 生成
     QButtonGroup* chk_group = new QButtonGroup(this);
-    checkGuest = new ColleagueCheckbox("Guest", this);
-    checkLogin = new ColleagueCheckbox("Login", this);
+    checkGuest = new ColleagueCheckbox("Guest", true, this);
+    checkLogin = new ColleagueCheckbox("Login", false, this);
     chk_group->addButton(checkGuest);
     chk_group->addButton(checkLogin);
 
@@ -48,9 +51,14 @@ void LoginFrame::createColleagues() {
     textPass->setMediator(this);
     buttonOk->setMediator(this);
     buttonCancel->setMediator(this);
-
-    // 设置Listener
 }
 
+// 接收来自于Colleage的通知然后判断各Colleage的启用/禁用状态。
 void LoginFrame::colleagueChanged() {
+    if (checkGuest->isChecked()) {
+        textUser->setColleagueEnabled(false);
+        textPass->setColleagueEnabled(false);
+        buttonOk->setColleagueEnabled(true);
+    } else { // Login mode
+    }
 }

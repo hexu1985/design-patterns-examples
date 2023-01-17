@@ -19,4 +19,7 @@ public:
 
     void setMediator(Mediator* mediator) override;
     void setColleagueEnabled(bool enabled) override;
+
+private slots:
+    void textValueChanged(const QString &text);
 };

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QRadioButton>
+#include <QButtonGroup>
 
 #include "Colleague.hpp"
 
@@ -14,11 +15,14 @@ private:
     Mediator* mediator;
 
 public:
-    ColleagueCheckbox(const std::string& caption, QWidget *parent = 0);
+    ColleagueCheckbox(const std::string& caption, bool checked, QWidget *parent = 0);
     ~ColleagueCheckbox();
 
     void setMediator(Mediator* mediator) override;
     void setColleagueEnabled(bool enabled) override;
+
+private slots:
+    void itemStateChanged(bool);
 };
 
 
