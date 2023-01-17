@@ -32,8 +32,11 @@ LoginFrame::~LoginFrame() {}
 void LoginFrame::createColleagues() {
     // 生成
     QButtonGroup* chk_group = new QButtonGroup(this);
-    checkGuest = new ColleagueCheckbox("Guest", true, this);
-    checkLogin = new ColleagueCheckbox("Login", false, this);
+    checkGuest = new ColleagueCheckbox("Guest", this);
+    checkGuest->setChecked(true);
+    checkLogin = new ColleagueCheckbox("Login", this);
+    checkLogin->setChecked(false);
+
     chk_group->addButton(checkGuest);
     chk_group->addButton(checkLogin);
 
@@ -51,6 +54,14 @@ void LoginFrame::createColleagues() {
     textPass->setMediator(this);
     buttonOk->setMediator(this);
     buttonCancel->setMediator(this);
+
+    // 设置Listener
+    connect(checkGuest, SIGNAL(toggled(bool)), checkGuest, SLOT(itemStateChanged(bool)));
+    connect(checkLogin, SIGNAL(toggled(bool)), checkLogin, SLOT(itemStateChanged(bool)));
+    connect(textUser,  SIGNAL(textChanged(const QString &)), textUser, SLOT(textValueChanged(const QString &)));
+    connect(textPass,  SIGNAL(textChanged(const QString &)), textPass, SLOT(textValueChanged(const QString &)));
+    connect(buttonOk, SIGNAL(clicked()), this, SLOT(actionPerformed()));
+    connect(buttonCancel, SIGNAL(clicked()), this, SLOT(actionPerformed()));
 }
 
 // 接收来自于Colleage的通知然后判断各Colleage的启用/禁用状态。
@@ -60,5 +71,27 @@ void LoginFrame::colleagueChanged() {
         textPass->setColleagueEnabled(false);
         buttonOk->setColleagueEnabled(true);
     } else { // Login mode
+        textUser->setColleagueEnabled(true);
+        userpassChanged();
     }
+}
+
+// 当textUser或是textPass文本输入框中的文字发生变化时
+// 判断各Colleage的启用/禁用状态
+void LoginFrame::userpassChanged() {
+    if (textUser->text().length() > 0) {
+        textPass->setColleagueEnabled(true);
+        if (textPass->text().length() > 0) {
+            buttonOk->setColleagueEnabled(true);
+        } else {
+            buttonOk->setColleagueEnabled(false);
+        }
+    } else {
+        textPass->setColleagueEnabled(false);
+        buttonOk->setColleagueEnabled(false);
+    }
+}
+
+void LoginFrame::actionPerformed() {
+    close();
 }

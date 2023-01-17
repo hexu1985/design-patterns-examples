@@ -25,4 +25,10 @@ public:
 
     void createColleagues() override;
     void colleagueChanged() override;
+
+private:
+    void userpassChanged(); 
+
+private slots:
+    void actionPerformed(); 
 };

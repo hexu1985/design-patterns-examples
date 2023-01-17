@@ -2,11 +2,9 @@
 
 #include "Mediator.hpp"
 
-ColleagueCheckbox::ColleagueCheckbox(const std::string& caption, bool checked, QWidget *parent)
+ColleagueCheckbox::ColleagueCheckbox(const std::string& caption, QWidget *parent)
     : QRadioButton(caption.c_str(), parent) {
 
-    setChecked(checked);
-    connect(this, SIGNAL(toggled(bool)), this, SLOT(itemStateChanged(bool)));
 }
 
 ColleagueCheckbox::~ColleagueCheckbox() {}

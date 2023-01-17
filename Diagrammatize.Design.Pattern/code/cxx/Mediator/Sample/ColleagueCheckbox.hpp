@@ -15,7 +15,7 @@ private:
     Mediator* mediator;
 
 public:
-    ColleagueCheckbox(const std::string& caption, bool checked, QWidget *parent = 0);
+    ColleagueCheckbox(const std::string& caption, QWidget *parent = 0);
     ~ColleagueCheckbox();
 
     void setMediator(Mediator* mediator) override;

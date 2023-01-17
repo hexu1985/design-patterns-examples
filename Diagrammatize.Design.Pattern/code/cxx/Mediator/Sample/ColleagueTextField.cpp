@@ -3,9 +3,6 @@
 
 ColleagueTextField::ColleagueTextField(const std::string& caption, QWidget *parent)
     : QLineEdit(caption.c_str(), parent) {
-
-    connect(this,  SIGNAL(textChanged(const QString &)),
-            this, SLOT(textValueChanged(const QString &)));
 }
 
 ColleagueTextField::~ColleagueTextField() {}
