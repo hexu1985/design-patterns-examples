@@ -1,6 +1,7 @@
 import copy
+from framework.Product import Product
 
-class MessageBox:
+class MessageBox(Product):
     def __init__(self, decochar):
         self.decochar = decochar
 

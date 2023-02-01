@@ -1,6 +1,7 @@
 import copy
+from framework.Product import Product
 
-class UnderlinePen:
+class UnderlinePen(Product):
     def __init__(self, ulchar):
         self.ulchar = ulchar
 
