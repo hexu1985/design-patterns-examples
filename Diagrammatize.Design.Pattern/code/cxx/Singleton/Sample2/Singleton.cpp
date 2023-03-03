@@ -6,8 +6,8 @@ Singleton::Singleton() {
 }
 
 Singleton& Singleton::getInstance() {
-    static Singleton singleton{};
-    return singleton;
+    static Singleton instance{};
+    return instance;
 }
 
 

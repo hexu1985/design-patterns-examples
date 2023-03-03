@@ -15,8 +15,8 @@ private:
 
 public:
     static T& getInstance() {
-        static T singleton;
-        return singleton;
+        static T instance;
+        return instance;
     }
 };
 
