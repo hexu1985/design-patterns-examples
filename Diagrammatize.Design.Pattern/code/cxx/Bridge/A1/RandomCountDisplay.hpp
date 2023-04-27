@@ -1,11 +1,11 @@
 #pragma once
 
 #include "CountDisplay.hpp"
-#include "RandomNumber.hpp"
+#include "Random.hpp"
 
 class RandomCountDisplay: public CountDisplay {
 private:
-    RandomNumber random;
+    Random random;
 
 public:
     RandomCountDisplay(DisplayImpl* impl);
