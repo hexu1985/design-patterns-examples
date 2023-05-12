@@ -6,7 +6,7 @@ from CountDisplay import CountDisplay
 class RandomCountDisplay(CountDisplay):
     def __init__(self, impl):
         super().__init__(impl)
-        random.seed(time.time())
+        self.random = random.Random(time.time())
 
     def randomDisplay(self, times):
-        self.multiDisplay(random.randint(0, times-1))
+        self.multiDisplay(self.random.randint(0, times-1))
