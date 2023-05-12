@@ -1,7 +1,7 @@
 import sys
 
 from Player import Player
-from WinningStrategy import WinningStrategy
+from RandomStrategy import RandomStrategy
 from ProbStrategy import ProbStrategy
 
 def main():
@@ -12,8 +12,8 @@ def main():
 
     seed1 = int(sys.argv[1])
     seed2 = int(sys.argv[2])
-    player1 = Player("Taro", WinningStrategy(seed1))
-    player2 = Player("Hana", ProbStrategy(seed2))
+    player1 = Player("Taro", ProbStrategy(seed1))
+    player2 = Player("Hana", RandomStrategy(seed2))
     for i in range(10000):
         nextHand1 = player1.nextHand()
         nextHand2 = player2.nextHand()

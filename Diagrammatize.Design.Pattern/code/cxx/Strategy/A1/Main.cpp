@@ -15,8 +15,8 @@ int main(int argc, char* argv[]) {
     int seed1 = std::stoi(argv[1]);
     int seed2 = std::stoi(argv[2]);
 
-    Player player1("Taro", new RandomStrategy(seed1));
-    Player player2("Hana", new ProbStrategy(seed2));
+    Player player1("Taro", new ProbStrategy(seed1));
+    Player player2("Hana", new RandomStrategy(seed2));
     for (int i = 0; i < 10000; i++) {
         Hand nextHand1 = player1.nextHand();
         Hand nextHand2 = player2.nextHand();
