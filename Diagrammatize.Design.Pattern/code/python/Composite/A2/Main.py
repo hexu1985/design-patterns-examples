@@ -22,7 +22,7 @@ def main():
         print("file = " + file_.getFullName())
         print("yuki = " + yuki.getFullName())
     except FileTreatmentException as e:
-        traceback.print_exec()
+        traceback.print_exc()
 
 if __name__ == "__main__":
     main()

@@ -23,7 +23,7 @@ def main():
         
         list_.accept(ListVisitor())
     except FileTreatmentException as e:
-        traceback.print_exec()
+        traceback.print_exc()
 
 
 if __name__ == "__main__":

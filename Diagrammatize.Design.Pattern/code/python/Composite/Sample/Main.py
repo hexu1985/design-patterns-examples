@@ -33,7 +33,7 @@ def main():
         tomura.add(File("junk.mail", 500))
         rootdir.printList()
     except FileTreatmentException as e:
-        traceback.print_exec()
+        traceback.print_exc()
 
 if __name__ == "__main__":
     main()

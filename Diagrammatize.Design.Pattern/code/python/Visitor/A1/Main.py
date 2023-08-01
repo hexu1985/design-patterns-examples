@@ -38,7 +38,7 @@ def main():
             print(str(file_))
 
     except FileTreatmentException as e:
-        traceback.print_exec()
+        traceback.print_exc()
 
 
 if __name__ == "__main__":
