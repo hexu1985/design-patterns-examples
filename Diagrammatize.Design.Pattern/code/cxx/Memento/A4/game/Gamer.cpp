@@ -60,7 +60,7 @@ std::string Gamer::toString() const {
         }
         os << f;
     }
-    os << " ]]\n";
+    os << " ]]";
     return os.str();
 }
 
