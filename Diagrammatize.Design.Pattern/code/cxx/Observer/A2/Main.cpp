@@ -1,10 +1,10 @@
 #include <QApplication>
+#include <thread>
 
 #include "RandomNumberGenerator.hpp"
 #include "DigitObserver.hpp"
 #include "GraphObserver.hpp"
 #include "FrameObserver.hpp"
-#include <thread>
 
 int main(int argc, char *argv[])
 {
