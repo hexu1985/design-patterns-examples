@@ -22,6 +22,13 @@ DrawCanvas::~DrawCanvas()
     delete pix;
 }
 
+void DrawCanvas::repaint()
+{
+    clear();
+    history->execute();
+    update();
+}
+
 void DrawCanvas::draw(int x, int y)
 {
     QPen pen;

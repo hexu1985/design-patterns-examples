@@ -25,7 +25,7 @@ Main::Main(const QString& title, QWidget *parent)
 
 //    setMinimumSize(600,400);
 
-    connect(clearButton, SIGNAL(clicked()), canvas, SLOT(clear()));
+    connect(clearButton, SIGNAL(clicked()), this, SLOT(onClearButton()));
 	canvas->installEventFilter(this);
 }
 
@@ -48,6 +48,12 @@ void Main::mouseDragged(QMouseEvent *e)
     std::shared_ptr<Command> cmd(new DrawCommand(canvas, e->pos()));
     history->append(cmd);
     cmd->execute();
+}
+
+void Main::onClearButton()
+{
+    history->clear();
+    canvas->repaint();
 }
 
 int

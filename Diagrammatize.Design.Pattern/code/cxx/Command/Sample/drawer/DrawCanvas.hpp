@@ -18,7 +18,7 @@ public:
     ~DrawCanvas();
 
     void draw(int x, int y) override;
-    
+    void repaint();   
     void paintEvent(QPaintEvent *);
 
 public slots:   

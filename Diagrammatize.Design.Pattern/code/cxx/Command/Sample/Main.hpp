@@ -13,6 +13,7 @@ public:
     
 public slots:
     bool eventFilter(QObject*,QEvent*);
+    void onClearButton();
     
 private:
     void mouseDragged(QMouseEvent *e);
