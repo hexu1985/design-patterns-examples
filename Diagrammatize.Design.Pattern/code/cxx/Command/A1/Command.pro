@@ -13,13 +13,15 @@ HEADERS += Main.hpp\
         command/MacroCommand.hpp\
         drawer/Drawable.hpp\
         drawer/DrawCanvas.hpp\
-        drawer/DrawCommand.hpp
+        drawer/DrawCommand.hpp\
+        drawer/ColorCommand.hpp
 
 SOURCES += Main.cpp\ 
         command/Command.cpp\
         command/MacroCommand.cpp\
         drawer/Drawable.cpp\
         drawer/DrawCanvas.cpp\
-        drawer/DrawCommand.cpp
+        drawer/DrawCommand.cpp\
+        drawer/ColorCommand.cpp
 
 QT += core gui widgets

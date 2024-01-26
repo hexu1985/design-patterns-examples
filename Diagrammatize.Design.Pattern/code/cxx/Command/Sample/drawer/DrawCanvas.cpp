@@ -2,7 +2,8 @@
 #include "DrawCanvas.hpp"
 #include <iostream>
 
-DrawCanvas::DrawCanvas(int width, int height, std::shared_ptr<MacroCommand> history)
+DrawCanvas::DrawCanvas(int width, int height, std::shared_ptr<MacroCommand> history_):
+    history(history_)
 {
     setAutoFillBackground(true);
 	
