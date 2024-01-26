@@ -15,28 +15,28 @@ Main::Main(const QString& title, QWidget *parent)
 
     setWindowTitle(title);    
 
-    QHBoxLayout *hboxLayout = new QHBoxLayout;
+    QHBoxLayout *buttonBox = new QHBoxLayout;
 
     clearButton = new QPushButton("clear", this);
-    hboxLayout->addWidget(clearButton);
+    buttonBox->addWidget(clearButton);
 
     redButton = new QPushButton("red", this);
-    hboxLayout->addWidget(redButton);
+    buttonBox->addWidget(redButton);
 
     greenButton = new QPushButton("green", this);
-    hboxLayout->addWidget(greenButton);
+    buttonBox->addWidget(greenButton);
 
     blueButton = new QPushButton("blue", this);
-    hboxLayout->addWidget(blueButton);
+    buttonBox->addWidget(blueButton);
    
-    QVBoxLayout *defaultLayout = new QVBoxLayout;
+    QVBoxLayout *mainBox = new QVBoxLayout;
 
-    defaultLayout->addLayout(hboxLayout);
+    mainBox->addLayout(buttonBox);
     
     canvas = new DrawCanvas(400, 400, history);
-    defaultLayout->addWidget(canvas);
+    mainBox->addWidget(canvas);
 
-    setLayout(defaultLayout);
+    setLayout(mainBox);
 
 //    setMinimumSize(600,400);
 

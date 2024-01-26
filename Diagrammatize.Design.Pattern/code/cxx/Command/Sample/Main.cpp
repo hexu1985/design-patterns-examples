@@ -1,4 +1,5 @@
 #include "Main.hpp"
+#include <QHBoxLayout>
 #include <QVBoxLayout>
 #include <QEvent>
 #include <QMouseEvent>
@@ -12,16 +13,20 @@ Main::Main(const QString& title, QWidget *parent)
     history = std::shared_ptr<MacroCommand>(new MacroCommand);
 
     setWindowTitle(title);    
-   
-    QVBoxLayout *vboxLayout = new QVBoxLayout();
+
+    QHBoxLayout *buttonBox = new QHBoxLayout;
 
     clearButton = new QPushButton("clear", this);
-    vboxLayout->addWidget(clearButton);
+    buttonBox->addWidget(clearButton);
+
+    QVBoxLayout *mainBox = new QVBoxLayout();
+
+    mainBox->addLayout(buttonBox);
     
     canvas = new DrawCanvas(400, 400, history);
-    vboxLayout->addWidget(canvas);
+    mainBox->addWidget(canvas);
 
-    setLayout(vboxLayout);
+    setLayout(mainBox);
 
 //    setMinimumSize(600,400);
 
