@@ -25,7 +25,7 @@ Main::Main(const QString& title, QWidget *parent)
 
 //    setMinimumSize(600,400);
 
-    connect(clearButton, SIGNAL(clicked()), this, SLOT(onClearButton()));
+    connect(clearButton, SIGNAL(clicked()), this, SLOT(onClearButtonClicked()));
 	canvas->installEventFilter(this);
 }
 
@@ -50,7 +50,7 @@ void Main::mouseDragged(QMouseEvent *e)
     cmd->execute();
 }
 
-void Main::onClearButton()
+void Main::onClearButtonClicked()
 {
     history->clear();
     canvas->repaint();

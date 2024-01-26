@@ -40,10 +40,10 @@ Main::Main(const QString& title, QWidget *parent)
 
 //    setMinimumSize(600,400);
 
-    connect(clearButton, SIGNAL(clicked()), canvas, SLOT(clear()));
-    connect(redButton, SIGNAL(clicked()), this, SLOT(setRedColor()));
-    connect(greenButton, SIGNAL(clicked()), this, SLOT(setGreenColor()));
-    connect(blueButton, SIGNAL(clicked()), this, SLOT(setBlueColor()));
+    connect(clearButton, SIGNAL(clicked()), this, SLOT(onClearButtonClicked()));
+    connect(redButton, SIGNAL(clicked()), this, SLOT(onRedButtonClicked()));
+    connect(greenButton, SIGNAL(clicked()), this, SLOT(onGreenButtonClicked()));
+    connect(blueButton, SIGNAL(clicked()), this, SLOT(onBlueButtonClicked()));
 	canvas->installEventFilter(this);
 }
 
@@ -68,17 +68,23 @@ void Main::mouseDragged(QMouseEvent *e)
     cmd->execute();
 }
 
-void Main::setRedColor()
+void Main::onClearButtonClicked()
+{
+    history->clear();
+    canvas->repaint();
+}
+
+void Main::onRedButtonClicked()
 {
     setColor(Qt::red);
 }
 
-void Main::setGreenColor()
+void Main::onGreenButtonClicked()
 {
     setColor(Qt::green);
 }
 
-void Main::setBlueColor()
+void Main::onBlueButtonClicked()
 {
     setColor(Qt::blue);
 }

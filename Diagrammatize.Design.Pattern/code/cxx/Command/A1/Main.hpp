@@ -13,9 +13,10 @@ public:
     
 public slots:
     bool eventFilter(QObject*,QEvent*);
-    void setRedColor();
-    void setGreenColor();
-    void setBlueColor();
+    void onClearButtonClicked();
+    void onRedButtonClicked();
+    void onGreenButtonClicked();
+    void onBlueButtonClicked();
     
 private:
     void mouseDragged(QMouseEvent *e);

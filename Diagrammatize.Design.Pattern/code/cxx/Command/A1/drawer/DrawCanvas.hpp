@@ -20,7 +20,7 @@ public:
     void init() override;
     void draw(int x, int y) override;
     void setColor(QColor color) override;
-    
+    void repaint();   
     void paintEvent(QPaintEvent *);
 
 public slots:   

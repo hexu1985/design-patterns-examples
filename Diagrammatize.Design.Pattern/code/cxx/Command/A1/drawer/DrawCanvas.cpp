@@ -31,6 +31,13 @@ void DrawCanvas::init()
     history->append(std::shared_ptr<Command>(new ColorCommand(this, color)));
 }
 
+void DrawCanvas::repaint()
+{
+    clear();
+    history->execute();
+    update();
+}
+
 void DrawCanvas::draw(int x, int y)
 {
     QPen pen;
