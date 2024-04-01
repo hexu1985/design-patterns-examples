@@ -19,7 +19,7 @@ class ColleagueTextField(tk.Entry, Colleague):
             self.config(state=tk.DISABLED)
 
     def notifyTextValueChanged(self, event):
-        # after 10ms
+        # call self.textValueChanged on event loop
         self.after(10, self.textValueChanged)
 
     def textValueChanged(self):
