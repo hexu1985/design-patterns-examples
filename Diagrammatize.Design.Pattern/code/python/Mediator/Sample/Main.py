@@ -3,7 +3,8 @@ from LoginFrame import LoginFrame
 
 def main():
     root = Tk()
-    frame = LoginFrame(root, "Mediator Sample")
+    root.title("Mediator Sample")
+    frame = LoginFrame(root)
     frame.pack()
     root.mainloop()
 

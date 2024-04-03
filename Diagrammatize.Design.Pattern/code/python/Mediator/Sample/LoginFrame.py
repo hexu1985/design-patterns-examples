@@ -6,7 +6,7 @@ from ColleagueTextField import ColleagueTextField
 from ColleagueButton import ColleagueButton
 
 class LoginFrame(tk.Frame):
-    def __init__(self, parent, title):
+    def __init__(self, parent):
         tk.Frame.__init__(self, parent)
         font=('Arial', 16)
         self.createColleagues(font=font)
