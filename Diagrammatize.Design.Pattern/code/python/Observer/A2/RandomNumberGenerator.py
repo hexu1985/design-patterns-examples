@@ -1,4 +1,5 @@
 import random
+import time
 
 from NumberGenerator import NumberGenerator
 
@@ -15,3 +16,4 @@ class RandomNumberGenerator(NumberGenerator):
         for i in range(0, 20):
             self.number = self.random.randint(0, 49)
             self.notifyObservers()
+            time.sleep(1)
