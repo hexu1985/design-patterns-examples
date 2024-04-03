@@ -1,21 +1,21 @@
 import sys
-from tkinter import *
+import tkinter as tk
 from Mediator import Mediator
 from ColleagueCheckbox import ColleagueCheckbox
 from ColleagueTextField import ColleagueTextField
 from ColleagueButton import ColleagueButton
 
-class LoginFrame(Frame):
+class LoginFrame(tk.Frame):
     def __init__(self, parent, title):
-        Frame.__init__(self, parent)
+        tk.Frame.__init__(self, parent)
         font=('Arial', 16)
         self.createColleagues(font=font)
 
         self.checkGuest.grid(row=0, column=0)
         self.checkLogin.grid(row=0, column=1)
-        Label(self, text="Username:", font=font).grid(row=1, column=0, padx=10)
+        tk.Label(self, text="Username:", font=font).grid(row=1, column=0, padx=10)
         self.textUser.grid(row=1, column=1, padx=10)
-        Label(self, text="Password:", font=font).grid(row=2, column=0, padx=10)
+        tk.Label(self, text="Password:", font=font).grid(row=2, column=0, padx=10)
         self.textPass.grid(row=2, column=1, padx=10)
         self.buttonOk.grid(row=3, column=0)
         self.buttonCancel.grid(row=3, column=1)
@@ -23,7 +23,7 @@ class LoginFrame(Frame):
         self.colleagueChanged()
 
     def createColleagues(self, font):
-        self.checkbox_var = IntVar(value=1)
+        self.checkbox_var = tk.IntVar(value=1)
         self.checkGuest = ColleagueCheckbox(self, "Guest", self.checkbox_var, 1, font=font)
         self.checkLogin = ColleagueCheckbox(self, "Login", self.checkbox_var, 2, font=font)
         self.textUser = ColleagueTextField(self, "", 16, font=font)
@@ -70,7 +70,7 @@ class LoginFrame(Frame):
         sys.exit()
 
 if __name__ == "__main__":
-    root = Tk()
+    root = tk.Tk()
     frame = LoginFrame(root, "hello")
     frame.pack()
     root.mainloop()

@@ -20,7 +20,7 @@ class ColleagueTextField(tk.Entry, Colleague):
 
     def notifyTextValueChanged(self, event):
         # call self.textValueChanged on event loop
-        self.after(10, self.textValueChanged)
+        self.after(0, self.textValueChanged)
 
     def textValueChanged(self):
         if self.mediator:
