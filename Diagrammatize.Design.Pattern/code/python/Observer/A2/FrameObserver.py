@@ -38,6 +38,7 @@ class GraphCanvas(Observer):
 class FrameObserver(tk.Frame, Observer):
     def __init__(self, parent):
         tk.Frame.__init__(self, parent)
+        self.pack()
 
         textfield = tk.Entry(parent)
         self.textGraph = GraphText(textfield)
@@ -58,6 +59,5 @@ class FrameObserver(tk.Frame, Observer):
 if __name__ == "__main__":
     root = tk.Tk()
     frame = FrameObserver(root)
-    frame.pack()
     root.mainloop()
 
