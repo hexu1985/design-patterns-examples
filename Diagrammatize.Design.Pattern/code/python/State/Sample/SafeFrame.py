@@ -5,15 +5,16 @@ from functools import partial
 from Context import Context
 from DayState import DayState
 from NightState import NightState
+from ScrolledText import ScrolledText
 
 class SafeFrame(tk.Frame):
     def __init__(self, parent):
         tk.Frame.__init__(self, parent)
         self.pack()
 
-        self.textClock = tk.Entry(self, width=60)
+        self.textClock = tk.Entry(self, width=62)
 
-        self.textScreen = tk.Text(self, height=10, width=60)
+        self.textScreen = ScrolledText(self, height=10, width=60)
 
         self.buttonUse = tk.Button(self, text="使用金库", command=self.buttonUseClicked)
         self.buttonAlarm = tk.Button(self, text="按下警铃", command=self.buttonAlarmClicked)
@@ -65,10 +66,10 @@ class SafeFrame(tk.Frame):
         self.state = state
 
     def callSecurityCenter(self, msg):
-        self.textScreen.insert(tk.END, "call! " + msg + "\n")
+        self.textScreen.appendText("call! " + msg + "\n")
 
     def recordLog(self, msg):
-        self.textScreen.insert(tk.END, "record ... " + msg + "\n")
+        self.textScreen.appendText("record ... " + msg + "\n")
 
 if __name__ == "__main__":
     root = tk.Tk()
