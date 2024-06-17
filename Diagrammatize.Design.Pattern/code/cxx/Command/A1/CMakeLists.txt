@@ -28,7 +28,8 @@ add_executable(Command
     drawer/DrawCommand.cpp
     drawer/ColorCommand.hpp
     drawer/ColorCommand.cpp
-    Main.hpp
+    MainWindow.hpp
+    MainWindow.cpp
     Main.cpp
     )
 

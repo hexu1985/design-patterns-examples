@@ -26,7 +26,8 @@ add_executable(Command
     drawer/DrawCanvas.cpp
     drawer/DrawCommand.hpp
     drawer/DrawCommand.cpp
-    Main.hpp
+    MainWindow.hpp
+    MainWindow.cpp
     Main.cpp
     )
 

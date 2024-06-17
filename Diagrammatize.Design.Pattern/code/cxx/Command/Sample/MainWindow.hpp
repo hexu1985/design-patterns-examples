@@ -5,11 +5,11 @@
 #include "drawer/DrawCanvas.hpp"
 #include "command/MacroCommand.hpp"
 
-class Main : public QWidget
+class MainWindow : public QWidget
 {
     Q_OBJECT
 public:
-    Main(const QString& title, QWidget *parent=0);
+    MainWindow(const QString& title, QWidget *parent=0);
     
 public slots:
     bool eventFilter(QObject*,QEvent*);

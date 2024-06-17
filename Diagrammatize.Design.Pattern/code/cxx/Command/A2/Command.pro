@@ -8,7 +8,7 @@ DEPENDPATH += .
 INCLUDEPATH += .
 
 # Input
-HEADERS += Main.hpp\
+HEADERS += MainWindow.hpp\
         command/Command.hpp\
         command/MacroCommand.hpp\
         drawer/Drawable.hpp\
@@ -16,6 +16,7 @@ HEADERS += Main.hpp\
         drawer/DrawCommand.hpp
 
 SOURCES += Main.cpp\ 
+        MainWindow.cpp\
         command/Command.cpp\
         command/MacroCommand.cpp\
         drawer/Drawable.cpp\
