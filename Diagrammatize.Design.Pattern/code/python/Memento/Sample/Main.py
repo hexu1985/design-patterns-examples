@@ -1,8 +1,7 @@
 
 import time
 
-from game.Memento import Memento
-from game.Gamer import Gamer
+from game import Memento, Gamer
 
 def main():
     gamer = Gamer(100)

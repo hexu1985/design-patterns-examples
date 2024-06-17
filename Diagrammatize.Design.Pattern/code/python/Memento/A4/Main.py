@@ -4,8 +4,7 @@ import traceback
 import sys
 import pickle
 
-from game.Memento import Memento
-from game.Gamer import Gamer
+from game import Memento, Gamer
 
 SAVEFILENAME = "game.dat"
 
