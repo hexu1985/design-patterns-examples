@@ -8,7 +8,6 @@ from ColleagueButton import ColleagueButton
 class LoginFrame(tk.Frame):
     def __init__(self, parent):
         tk.Frame.__init__(self, parent)
-        self.pack()
         font=('Arial', 16)
         self.createColleagues(font=font)
 
@@ -73,4 +72,5 @@ class LoginFrame(tk.Frame):
 if __name__ == "__main__":
     root = tk.Tk()
     frame = LoginFrame(root)
+    frame.pack()
     root.mainloop()
