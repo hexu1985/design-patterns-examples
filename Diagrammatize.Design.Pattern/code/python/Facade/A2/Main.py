@@ -1,4 +1,4 @@
-from pagemaker.PageMaker import PageMaker
+from pagemaker import PageMaker
 
 def main():
     PageMaker.makeLinkPage("linkpage.html")

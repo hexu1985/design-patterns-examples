@@ -1,4 +1,4 @@
-from pagemaker.PageMaker import PageMaker
+from pagemaker import PageMaker
 
 def main():
     PageMaker.makeWelcomePage("hyuki@hyuki.com", "welcome.html")
