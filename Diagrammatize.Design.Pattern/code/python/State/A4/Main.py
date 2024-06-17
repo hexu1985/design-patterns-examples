@@ -13,6 +13,7 @@ def main():
     root = tk.Tk()
     root.title("State Sample")
     frame = SafeFrame(root)
+    frame.pack()
 
     clock_thread = threading.Thread(target=update_clock, args=(frame, ), daemon=True)
     clock_thread.start()

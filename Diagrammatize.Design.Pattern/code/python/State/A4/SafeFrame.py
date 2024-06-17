@@ -10,7 +10,6 @@ from ScrolledText import ScrolledText
 class SafeFrame(tk.Frame):
     def __init__(self, parent):
         tk.Frame.__init__(self, parent)
-        self.pack()
 
         self.textClock = tk.Entry(self, width=62)
 
@@ -74,5 +73,6 @@ class SafeFrame(tk.Frame):
 if __name__ == "__main__":
     root = tk.Tk()
     frame = SafeFrame(root)
+    frame.pack()
     root.mainloop()
 
