@@ -12,6 +12,7 @@ def generator_execute(generator):
 def main():
     root = tk.Tk()
     frame = FrameObserver(root)
+    frame.pack()
 
     generator = RandomNumberGenerator()
     observer1 = DigitObserver()
