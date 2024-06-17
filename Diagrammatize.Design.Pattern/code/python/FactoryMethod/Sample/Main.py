@@ -1,4 +1,4 @@
-from idcard.IDCardFactory import IDCardFactory
+from idcard import IDCardFactory
 
 def main():
     factory = IDCardFactory()

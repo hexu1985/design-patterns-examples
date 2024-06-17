@@ -1,4 +1,4 @@
-from framework.Product import Product
+from framework import Product
 
 class IDCard(Product):
     def __init__(self, owner, serial):

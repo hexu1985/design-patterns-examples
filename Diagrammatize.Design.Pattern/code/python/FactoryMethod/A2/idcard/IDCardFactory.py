@@ -1,4 +1,4 @@
-from framework.Factory import Factory
+from framework import Factory
 from .IDCard import IDCard
 
 class IDCardFactory(Factory):
