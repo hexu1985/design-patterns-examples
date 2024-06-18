@@ -1,4 +1,4 @@
-from framework.Manager import Manager
+from framework import Manager
 from UnderlinePen import UnderlinePen
 from MessageBox import MessageBox
 
