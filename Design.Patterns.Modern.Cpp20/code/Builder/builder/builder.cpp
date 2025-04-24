@@ -72,16 +72,18 @@ int main()
     output += "<p>";
     output += text;
     output += "</p>";
-    printf("<p>%s</p>", text);
+    printf("<p>%s</p>\n", text);
+    fflush(stdout);
 
     // <ul><li>hello</li><li>world</li></ul>
     string words[] = { "hello", "world" };
     ostringstream oss;
-    oss << "<ul>";
+    oss << "<ul>\n";
     for (auto w : words)
-        oss << "  <li>" << w << "</li>";
-    oss << "</ul>";
+        oss << "  <li>" << w << "</li>\n";
+    oss << "</ul>\n";
     printf(oss.str().c_str());
+    fflush(stdout);
 
     // easier
     HtmlBuilder builder{ "ul" };
