@@ -13,7 +13,7 @@ string words[] = { "hello", "world" };
 ostringstream oss;
 oss << "<ul>";
 for (auto w : words)
-oss << " <li>" << w << "</li>";
+	oss << " <li>" << w << "</li>";
 oss << "</ul>";
 printf(oss.str().c_str())
 ```
