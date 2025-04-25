@@ -72,8 +72,7 @@ int main()
     output += "<p>";
     output += text;
     output += "</p>";
-    printf("<p>%s</p>\n", text);
-    fflush(stdout);
+    cout << output << endl;
 
     // <ul><li>hello</li><li>world</li></ul>
     string words[] = { "hello", "world" };
@@ -82,8 +81,7 @@ int main()
     for (auto w : words)
         oss << "  <li>" << w << "</li>\n";
     oss << "</ul>\n";
-    printf(oss.str().c_str());
-    fflush(stdout);
+    cout << oss.str() << endl;
 
     // easier
     HtmlBuilder builder{ "ul" };
