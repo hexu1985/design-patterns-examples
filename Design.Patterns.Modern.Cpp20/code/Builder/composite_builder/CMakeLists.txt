@@ -1,6 +1,6 @@
 cmake_minimum_required( VERSION 3.15 )
 
-project ( composite_builder )
+project ( composite_builder LANGUAGES CXX )
 
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_EXTENSIONS OFF)
