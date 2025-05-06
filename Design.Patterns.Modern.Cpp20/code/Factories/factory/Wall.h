@@ -21,4 +21,9 @@ public:
             << " elevation: " << obj.elevation
             << " height: " << obj.height;
     }
+
+    bool intersects(const Wall& other) const
+    {
+        return false;
+    }
 };
