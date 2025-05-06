@@ -1,6 +1,6 @@
 cmake_minimum_required( VERSION 3.15 )
 
-project ( factory_method LANGUAGES CXX )
+project ( nested_factory LANGUAGES CXX )
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_EXTENSIONS OFF)
@@ -11,4 +11,4 @@ message( STATUS "PROJECT_SOURCE_DIR = ${PROJECT_SOURCE_DIR}" )
 
 file(GLOB SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp)
 file(GLOB HEADERS ${CMAKE_CURRENT_SOURCE_DIR}/*.h)
-add_executable( factory_method ${SOURCES} ${HEADERS} )
+add_executable( nested_factory ${SOURCES} ${HEADERS} )

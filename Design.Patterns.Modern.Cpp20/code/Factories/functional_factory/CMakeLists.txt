@@ -1,6 +1,6 @@
 cmake_minimum_required( VERSION 3.15 )
 
-project ( factory LANGUAGES CXX )
+project ( abstract_factory LANGUAGES CXX )
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_EXTENSIONS OFF)
@@ -11,4 +11,4 @@ message( STATUS "PROJECT_SOURCE_DIR = ${PROJECT_SOURCE_DIR}" )
 
 file(GLOB SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp)
 file(GLOB HEADERS ${CMAKE_CURRENT_SOURCE_DIR}/*.h)
-add_executable( factory ${SOURCES} ${HEADERS} )
+add_executable( abstract_factory ${SOURCES} ${HEADERS} )
