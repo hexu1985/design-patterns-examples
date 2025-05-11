@@ -60,6 +60,7 @@ class InitUI():
         OKButton(root, boxes).grid(column=1, row=3, padx=20)
 
         mainloop()
+
 def main():
     root = Tk()
     InitUI(root)

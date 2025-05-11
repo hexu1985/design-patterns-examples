@@ -13,7 +13,7 @@ def disp_slogan():
 
 # set up the window
 root = tk.Tk()  # get the window
-root.geometry("100x100+300+300")  # x, y window size and position
+root.geometry("200x100+300+300")  # x, y window size and position
 
 # create Hello button
 slogan = Button(root,
