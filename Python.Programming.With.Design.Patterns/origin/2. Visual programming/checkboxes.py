@@ -52,6 +52,7 @@ class InitUI():
         #Create the Order button and give it the list of boxes
         OKButton(root, boxes).grid(column=1, row=3, padx=20)
         mainloop()
+
 def main():
     root = Tk()
     InitUI(root)

@@ -3,6 +3,7 @@ and the menu items, to preserve information encapsulation.
 Each menu item contains its own comd action method
  """
 
+import sys
 import tkinter as tk
 from tkinter import filedialog
 from tkinter import *
