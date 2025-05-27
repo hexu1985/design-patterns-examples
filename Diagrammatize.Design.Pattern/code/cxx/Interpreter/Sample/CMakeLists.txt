@@ -28,7 +28,8 @@ add_custom_target(copy_files ALL
 )
 
 file(GLOB sources ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp)
+file(GLOB headers ${CMAKE_CURRENT_SOURCE_DIR}/*.hpp)
 
-add_executable(Interpreter ${sources})
+add_executable(Interpreter ${sources} ${headers})
 add_dependencies(Interpreter copy_files)
 
