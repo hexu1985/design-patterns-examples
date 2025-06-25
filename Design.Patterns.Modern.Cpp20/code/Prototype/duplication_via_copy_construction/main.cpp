@@ -26,6 +26,17 @@ struct Contact {
 
     ~Contact() { delete address; }
 
+    Contact(const Contact& other)
+        : name{other.name}
+        //, address{ new Address{*other.address} }
+    {
+        address = new Address(
+                    other.address->street,
+                    other.address->city,
+                    other.address->suite
+                );
+    }
+
     friend ostream &operator<<(ostream &os, const Contact &contact) {
         return os << "name: " << contact.name << " address: " << *contact.address;
     }
