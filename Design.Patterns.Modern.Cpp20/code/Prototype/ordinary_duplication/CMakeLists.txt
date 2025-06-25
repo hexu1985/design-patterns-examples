@@ -9,6 +9,5 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 message( STATUS "CMAKE_PROJECT_NAME = ${CMAKE_PROJECT_NAME}" )
 message( STATUS "PROJECT_SOURCE_DIR = ${PROJECT_SOURCE_DIR}" )
 
-file(GLOB SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp)
-file(GLOB HEADERS ${CMAKE_CURRENT_SOURCE_DIR}/*.hpp)
-add_executable( ordinary_duplication ${SOURCES} ${HEADERS} )
+add_executable( ordinary_duplication1 main1.cpp )
+add_executable( ordinary_duplication2 main2.cpp )

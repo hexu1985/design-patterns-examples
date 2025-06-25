@@ -32,21 +32,15 @@ struct Contact {
 };
 
 int main() {
-    // same address, different suite
-    Contact john{"john doe", new Address{"123 lele", "London", 123}};
-    // Contact jane{"jane doe", Address{"123 lele", "London", 103}};
+    // here is the prototype:
+    Contact worker{"", new Address{"123 East Dr", "London", 0}};
 
-    // here, the problem is that we are not doing a deep copy of the address of
-    // john to jane, and when modifying it, we end up modifying john's address
-    // as well because we copied the pointer to john.address, not the address
-    // itself
-
-    Contact jane = john;
-    jane.name = "jane doe";
-    jane.address->suite = 103;
+    // make a copy of prototype and customize it
+    Contact john = worker;
+    john.name = "John Doe";
+    john.address->suite = 10;
 
     cout << john << endl;
-    cout << jane << endl;
 
     return 0;
 }

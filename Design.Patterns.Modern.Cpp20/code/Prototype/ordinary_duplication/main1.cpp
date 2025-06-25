@@ -19,37 +19,24 @@ struct Address {
 
 struct Contact {
     string name;
-    Address *address;
+    Address address;
 
-    Contact(const string &name, Address *address)
+    Contact(const string &name, const Address &address)
         : name(name), address(address) {}
 
-    ~Contact() { delete address; }
-
-    Contact(const Contact& other)
-        : name{other.name}
-    //, address{ new Address{*other.address} }
-    {
-        address = new Address(
-                other.address->street,
-                other.address->city,
-                other.address->suite
-                );
-    }
-
     friend ostream &operator<<(ostream &os, const Contact &contact) {
-        return os << "name: " << contact.name << " address: " << *contact.address;
+        return os << "name: " << contact.name << " address: " << contact.address;
     }
 };
 
 int main() {
     // here is the prototype:
-    Contact worker{"", new Address{"123 East Dr", "London", 0}};
+    Contact worker{"", Address{"123 East Dr", "London", 0}};
 
     // make a copy of prototype and customize it
     Contact john = worker;
     john.name = "John Doe";
-    john.address->suite = 10;
+    john.address.suite = 10;
 
     cout << john << endl;
 
