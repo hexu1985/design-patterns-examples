@@ -1,6 +1,7 @@
 #include "widget.h"
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QGridLayout>
+#include <QDebug>
 
 Widget::Widget(QWidget *parent)
     : QWidget(parent)
