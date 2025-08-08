@@ -1,6 +1,8 @@
 #include "Canvas.hpp"
 #include <QPainter>
 
+namespace {
+
 class Rectangle {
 private:
     QPainter* painter;
@@ -23,6 +25,8 @@ public:
         Rectangle::draw(x, y, w, w);
     }
 };
+
+}   // namespace
 
 Canvas::Canvas(QWidget *parent)
     : QWidget(parent)
