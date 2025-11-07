@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(Hellobuts VERSION 0.1 LANGUAGES CXX)
+project(Hellobuttons VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
@@ -21,18 +21,18 @@ set(PROJECT_SOURCES
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
-    qt_add_executable(Hellobuts
+    qt_add_executable(Hellobuttons
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
     )
 else()
-    add_executable(Hellobuts
+    add_executable(Hellobuttons
         ${PROJECT_SOURCES}
     )
 endif()
 
-target_link_libraries(Hellobuts PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+target_link_libraries(Hellobuttons PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
 
 if(QT_VERSION_MAJOR EQUAL 6)
-    qt_finalize_executable(Hellobuts)
+    qt_finalize_executable(Hellobuttons)
 endif()

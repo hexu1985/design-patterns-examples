@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(derived2buts VERSION 0.1 LANGUAGES CXX)
+project(Derived2buttons VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
@@ -27,18 +27,18 @@ set(PROJECT_SOURCES
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
-    qt_add_executable(derived2buts
+    qt_add_executable(Derived2buttons
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
     )
 else()
-    add_executable(derived2buts
+    add_executable(Derived2buttons
         ${PROJECT_SOURCES}
     )
 endif()
 
-target_link_libraries(derived2buts PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+target_link_libraries(Derived2buttons PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
 
 if(QT_VERSION_MAJOR EQUAL 6)
-    qt_finalize_executable(derived2buts)
+    qt_finalize_executable(Derived2buttons)
 endif()
