@@ -4,3 +4,4 @@
 - [按钮子类](Hellobuttons)
 - [消息框及文件窗口程序](Messageboxes)
 - [输入和显示用户姓名](Yourname)
+- [输入并添加两个数字](Simplemath)
