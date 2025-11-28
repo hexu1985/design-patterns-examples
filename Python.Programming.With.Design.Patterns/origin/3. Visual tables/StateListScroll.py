@@ -7,7 +7,7 @@ from tkinter.ttk import *
 
 
 DATA_FILE="c:/users/James/Onedrive/documents/python/states.txt"
-DATA_FILE="states.txt"
+DATA_FILE="States.txt"
 """Object representing one state
  Contains the name, abbreviation, capital and founding date"""
 class State():
@@ -65,9 +65,9 @@ class BuildUI():
             self.listbox.insert(END, state.getStateName())
 
         #create 3 labels on right
-        self.lbstate = Label("")
+        self.lbstate = Label(root, text="")
         self.lbabbrev = Label(root, text="", foreground="red")
-        self.lbcapital = Label("")
+        self.lbcapital = Label(root, text="")
         self.lbstate.grid(column=2, row=0, sticky=W) #left aligned
         self.lbabbrev.grid(column=2, row=1, sticky=W)
         self.lbcapital.grid(column=2, row=2, sticky=W)
@@ -86,11 +86,11 @@ class BuildUI():
         index = self.listbox.curselection()
         i = int(self.listbox.curselection()[0])
         state = self.states[i]
-"""
         self.lbstate.config(text=state.getStateName())
         self.lbcapital.config(text=state.getCapital())
         self.lbabbrev.config(text=state.getAbbrev())
 
+"""
     def keyPress(self, evt):
         char = self.entry.get().upper()
         i=0
