@@ -1,0 +1,29 @@
+#pragma once
+
+#include <QWidget>
+#include <QLabel>
+#include <QLineEdit>
+#include <QListWidget>
+#include "StateList.h"
+
+class Widget : public QWidget {
+    Q_OBJECT
+    
+private:
+    QVector<State> _states;
+    QListWidget* _listWidget;
+    QLineEdit* _entry;
+    QLabel* _lbState;
+    QLabel* _lbAbbrev;
+    QLabel* _lbCapital;
+    QLabel* _lbFounded;
+    
+    void loadLabels(const State& state);
+
+public:
+    Widget(QWidget* parent, const QVector<State>& states);
+    
+private slots:
+    void onSelectionChanged();
+    void onKeyPress();
+};

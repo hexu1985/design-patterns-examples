@@ -4,7 +4,7 @@ from tkinter.ttk import *
 import os, sys
 
 
-DATA_FILE="states.txt"
+DATA_FILE="States.txt"
 """Object representing one state
  Contains the name, abbreviation, capital and founding date"""
 class State():
@@ -66,10 +66,10 @@ class BuildUI():
             self.listbox.insert(END, state.getStateName())
 
         #create 4 labels on right
-        self.lbstate = Label("")
+        self.lbstate = Label(root, text="")
         self.lbabbrev = Label(root, text="", foreground="red")
-        self.lbcapital = Label("")
-        self.lbfounded = Label("")
+        self.lbcapital = Label(root, text="")
+        self.lbfounded = Label(root, text="")
         self.lbstate.grid(column=2, row=0, sticky=W) #left aligned
         self.lbabbrev.grid(column=2, row=1, sticky=W)
         self.lbcapital.grid(column=2, row=2, sticky=W)
