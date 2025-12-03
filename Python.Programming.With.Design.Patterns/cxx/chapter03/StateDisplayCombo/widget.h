@@ -22,5 +22,5 @@ public:
     Widget(QWidget* parent, const QVector<State>& states);
     
 private slots:
-    void onStateSelected(int index); 
+    void onSelectionChanged();
 };

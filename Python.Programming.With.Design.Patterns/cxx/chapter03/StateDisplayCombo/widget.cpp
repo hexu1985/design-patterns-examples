@@ -5,7 +5,7 @@
 #include <QVBoxLayout>
 #include <QKeyEvent>
 #include <QScrollBar>
-#include <QListWidgetItem>
+#include <QStringList>
 
 Widget::Widget(QWidget* parent, const QVector<State>& states) 
     : QWidget(parent), _states(states) {
@@ -18,19 +18,22 @@ Widget::Widget(QWidget* parent, const QVector<State>& states)
 
     // 创建左侧组合框
     _comboBox = new QComboBox(this);
-    _comboBox->setCurrentIndex(0);
 
     // 添加州名到列表
-    for (const State& state : _states) {
-        _comboBox->addItem(state.getStateName());
+    QStringList names;
+    for (const auto &state : _states) {
+        names.append(state.getStateName());
     }
+    _comboBox->addItems(names);
+    _comboBox->setCurrentIndex(0);
 
     // 连接选择信号
     connect(_comboBox, QOverload<int>::of(&QComboBox::currentIndexChanged),
-                this, &Widget::onStateSelected);
+                this, &Widget::onSelectionChanged);
 
     // 添加到左侧布局
     leftLayout->addWidget(_comboBox);
+    leftLayout->addStretch();
 
     // 创建右侧标签区域
     QWidget* rightWidget = new QWidget(this);
@@ -70,7 +73,8 @@ Widget::Widget(QWidget* parent, const QVector<State>& states)
     setFixedSize(400, 200);
 }
 
-void Widget::onStateSelected(int index) {
+void Widget::onSelectionChanged() {
+    int index = _comboBox->currentIndex();
     if (index >= 0 && index < _states.size()) {
         const State& state = _states[index];
         loadLabels(state);
