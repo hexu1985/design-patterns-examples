@@ -6,7 +6,7 @@ from tkinter import *
 from tkinter.ttk import *
 
 
-DATA_FILE="states.txt"
+DATA_FILE="States.txt"
 """Object representing one state
  Contains the name, abbreviation, capital and founding date"""
 class State():
