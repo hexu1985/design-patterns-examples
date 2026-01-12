@@ -1,69 +1,66 @@
 #include "Context.hpp"
 #include "ParseException.hpp"
+#include <sstream>
 
-Context::Context(const std::string& text): input_(text) {
-    c_ = input_[p_];
+namespace {
+
+std::vector<std::string> tokenize(const std::string& text) {
+    std::vector<std::string> result;
+    std::istringstream iss(text);
+    std::string token;
+
+    while (iss >> token) {
+        result.push_back(token);
+    }
+    return result;
+}
+
+}   // namespace
+
+Context::Context(const std::string& text) {
+    tokens_ = tokenize(text);
+    currentIndex_ = 0;
     nextToken();
 }
 
-void Context::consume() {
-    p_++;
-    if (p_ >= input_.length()) c_ = EOL;
-    else c_ = input_[p_];
-}
-
-void Context::WS() {
-    while (c_ == ' ' || c_ == '\t' || c_ == '\n' || c_ == '\r')
-        consume();
-}
-
 std::string Context::nextToken() {
-    while (c_ != EOL) {
-        switch (c_) {
-            case ' ': case '\t': case '\n': case '\r': WS(); continue;
-            default:
-                if (isLETTER()) return NAME();
-                else if (isDIGIT()) return NUMBER();
-                else throw ParseException(std::string("invalid charater: ")+c_);
-        }
+    if (currentIndex_ < tokens_.size()) {
+        currentToken_ = tokens_[currentIndex_];
+        currentIndex_++;
+    } else {
+        currentToken_ = "";
     }
+    return currentToken_;
+}
 
-    currentToken_ = "";
+const std::string& Context::currentToken() const {
     return currentToken_;
 }
 
 void Context::skipToken(const std::string& token) {
-    if (currentToken_ != token) {
+    if (token != currentToken_) {
         throw ParseException("Warning: " + token + " is expected, but " + currentToken_ + " is found.");
     }
     nextToken();
 }
 
 int Context::currentNumber() {
-    int number = 0;
-    try {
-        number = std::stoi(currentToken_);
-    } catch (const std::exception& e) {
-        throw ParseException("Warning: " + std::string(e.what()));
+    if (currentToken_.empty()) {
+        throw ParseException("Warning: Empty token");
     }
 
-    return number;
-}
+    try {
+        size_t pos;
+        int number = std::stoi(currentToken_, &pos);
 
-std::string Context::NAME() {
-    currentToken_.clear();
-    do {
-        currentToken_ += c_;
-        consume();
-    } while (isLETTER());
-    return currentToken_;
-}
-
-std::string Context::NUMBER() {
-    currentToken_.clear();
-    do {
-        currentToken_ += c_;
-        consume();
-    } while (isDIGIT());
-    return currentToken_;
+        // 检查是否整个字符串都被转换了
+        if (pos != currentToken_.length()) {
+            throw ParseException("Warning: Invalid number format: " + currentToken_);
+        }
+        return number;
+    } catch (const std::invalid_argument& e) {
+        throw ParseException("Warning: Invalid argument: " + currentToken_);
+    } catch (const std::out_of_range& e) {
+        throw ParseException("Warning: Number out of range: " + currentToken_);
+    }
 }
