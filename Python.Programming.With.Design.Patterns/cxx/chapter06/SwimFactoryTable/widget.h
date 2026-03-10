@@ -3,6 +3,7 @@
 #include <vector>
 #include <QWidget>
 #include <QListWidget>
+#include <QTableWidget>
 
 #include "Swimmer.h"
 
@@ -19,5 +20,5 @@ private:
     void updateSwimmersList(const std::vector<Swimmer>& swimmers);
 
     QListWidget* listEvents;
-    QListWidget* listSwimmers;
+    QTableWidget* tableSwimmers;
 };

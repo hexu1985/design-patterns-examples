@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(SwimFactory VERSION 0.1 LANGUAGES CXX)
+project(SwimFactoryTable VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
@@ -47,20 +47,20 @@ set(PROJECT_SOURCES
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
-    qt_add_executable(SwimFactory
+    qt_add_executable(SwimFactoryTable
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
     )
 else()
-    add_executable(SwimFactory
+    add_executable(SwimFactoryTable
         ${PROJECT_SOURCES}
     )
 endif()
 
-add_dependencies(SwimFactory copy_test_datafile)
+add_dependencies(SwimFactoryTable copy_test_datafile)
 
-target_link_libraries(SwimFactory PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+target_link_libraries(SwimFactoryTable PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
 
 if(QT_VERSION_MAJOR EQUAL 6)
-    qt_finalize_executable(SwimFactory)
+    qt_finalize_executable(SwimFactoryTable)
 endif()

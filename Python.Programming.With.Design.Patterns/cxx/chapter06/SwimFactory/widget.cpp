@@ -6,10 +6,6 @@
 #include "Seeding.h"
 
 Widget::Widget(QWidget* parent) : QWidget(parent) {
-    setupUI();
-}
-
-void Widget::setupUI() {
     QHBoxLayout* layout = new QHBoxLayout(this);
 
     listEvents = new QListWidget;
