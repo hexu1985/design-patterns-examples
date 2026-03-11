@@ -3,29 +3,31 @@
 #include <QVBoxLayout>
 #include <QStringList>
 #include <QHeaderView>
+#include <QTableWidgetItem>
 
 Widget::Widget(QWidget* parent, const QVector<State>& states) 
     : QWidget(parent) {
     // 创建布局
     QVBoxLayout* layout = new QVBoxLayout(this);
 
-    // 创建树形控件
-    treeWidget = new QTreeWidget(this);
-    treeWidget->setColumnCount(4);
+    // 创建表格控件
+    tableWidget = new QTableWidget(this);
+    tableWidget->setColumnCount(4);
+    tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
     // 设置列标题
     QStringList headers;
     headers << "Name" << "Abbrev" << "Capital" << "Founded";
-    treeWidget->setHeaderLabels(headers);
+    tableWidget->setHorizontalHeaderLabels(headers);
 
     // 设置列宽
-    treeWidget->setColumnWidth(0, 100);
-    treeWidget->setColumnWidth(1, 50);
-    treeWidget->setColumnWidth(2, 100);
-    treeWidget->setColumnWidth(3, 70);
+    tableWidget->setColumnWidth(0, 100);
+    tableWidget->setColumnWidth(1, 50);
+    tableWidget->setColumnWidth(2, 100);
+    tableWidget->setColumnWidth(3, 70);
 
     // 设置列不可拉伸
-    QHeaderView* header = treeWidget->header();
+    QHeaderView* header = tableWidget->horizontalHeader();
     header->setSectionResizeMode(0, QHeaderView::Fixed);
     header->setSectionResizeMode(1, QHeaderView::Fixed);
     header->setSectionResizeMode(2, QHeaderView::Fixed);
@@ -38,18 +40,18 @@ Widget::Widget(QWidget* parent, const QVector<State>& states)
 
     // 添加数据
     for (const State& state : states) {
-        QTreeWidgetItem* item = new QTreeWidgetItem(treeWidget);
-        item->setText(0, state.getStateName());
-        item->setText(1, state.getAbbrev());
-        item->setText(2, state.getCapital());
-        item->setText(3, state.getFounded());
+        int row = tableWidget->rowCount();
+        tableWidget->insertRow(row);
+        tableWidget->setItem(row, 0, new QTableWidgetItem(state.getStateName()));
+        tableWidget->setItem(row, 1, new QTableWidgetItem(state.getAbbrev()));
+        tableWidget->setItem(row, 2, new QTableWidgetItem(state.getCapital()));
+        tableWidget->setItem(row, 3, new QTableWidgetItem(state.getFounded()));
     }
 
-    // 将树形控件添加到布局
-    layout->addWidget(treeWidget);
+    // 将表格控件添加到布局
+    layout->addWidget(tableWidget);
     layout->setContentsMargins(0, 0, 0, 0);
 
     // 设置布局
     setLayout(layout);
 }
-
