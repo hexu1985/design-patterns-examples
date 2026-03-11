@@ -13,7 +13,7 @@ Widget::Widget(QWidget* parent, const QVector<State>& states)
     // 创建表格控件
     tableWidget = new QTableWidget(this);
     tableWidget->setColumnCount(4);
-    tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    //tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
     // 设置列标题
     QStringList headers;
