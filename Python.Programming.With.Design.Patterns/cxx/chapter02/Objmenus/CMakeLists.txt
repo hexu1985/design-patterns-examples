@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(Menus VERSION 0.1 LANGUAGES CXX)
+project(Objmenus VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
@@ -14,27 +14,22 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(QT NAMES Qt6 Qt5 COMPONENTS Widgets REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets REQUIRED)
 
-set(PROJECT_SOURCES
-    Canvas.cpp
-    Canvas.hpp
-    main.cpp
-    MainWindow.cpp
-    MainWindow.hpp
-)
+set(PROJECT_SOURCES)
+file(GLOB PROJECT_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp ${CMAKE_CURRENT_SOURCE_DIR}/*.hpp)
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
-    qt_add_executable(Menus
+    qt_add_executable(Objmenus
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
     )
 else()
-    add_executable(Menus
+    add_executable(Objmenus
         ${PROJECT_SOURCES}
     )
 endif()
 
-target_link_libraries(Menus PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+target_link_libraries(Objmenus PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
 
 if(QT_VERSION_MAJOR EQUAL 6)
-    qt_finalize_executable(Menus)
+    qt_finalize_executable(Objmenus)
 endif()

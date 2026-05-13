@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(checkbox VERSION 0.1 LANGUAGES CXX)
+project(checkboxes VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
@@ -14,25 +14,22 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(QT NAMES Qt6 Qt5 COMPONENTS Widgets REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets REQUIRED)
 
-set(PROJECT_SOURCES
-    main.cpp
-    widget.cpp
-    widget.h
-)
+set(PROJECT_SOURCES)
+file(GLOB PROJECT_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp ${CMAKE_CURRENT_SOURCE_DIR}/*.hpp)
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
-    qt_add_executable(checkbox
+    qt_add_executable(checkboxes
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
     )
 else()
-    add_executable(checkbox
+    add_executable(checkboxes
         ${PROJECT_SOURCES}
     )
 endif()
 
-target_link_libraries(checkbox PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+target_link_libraries(checkboxes PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
 
 if(QT_VERSION_MAJOR EQUAL 6)
-    qt_finalize_executable(checkbox)
+    qt_finalize_executable(checkboxes)
 endif()
