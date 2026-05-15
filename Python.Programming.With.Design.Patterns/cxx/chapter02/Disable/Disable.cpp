@@ -5,6 +5,7 @@
 
 // Dbutton 基类：禁用/启用按钮，并定义纯虚函数 comd()
 class Dbutton : public QPushButton {
+    Q_OBJECT   // needed for custom slot    
 public:
     Dbutton(QWidget* master = nullptr, const QString& text = "")
         : QPushButton(text, master)
@@ -110,3 +111,6 @@ int main(int argc, char* argv[]) {
     root.show();
     return app.exec();                    // 主循环
 }
+
+// Include moc-generated code when using Q_OBJECT in a .cpp file
+#include "Disable.moc"
