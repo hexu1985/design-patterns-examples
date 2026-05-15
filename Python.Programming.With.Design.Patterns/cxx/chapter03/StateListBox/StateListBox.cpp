@@ -52,7 +52,7 @@ public:
         while (!in.atEnd()) {
             QString line = in.readLine().trimmed();
             if (!line.isEmpty()) {
-                State* state = new State(line);
+                auto state = std::make_shared<State>(line);
                 states.append(state);
             }
         }
@@ -61,15 +61,15 @@ public:
 
     QStringList getText() const {
         QStringList list;
-        for (State* s : states)
+        for (const auto& s : states)
             list << s->getStateName();
         return list;
     }
 
-    QList<State*> getStateList() const { return states; }
+    const QList<std::shared_ptr<State>>& getStateList() const { return states; }
 
 private:
-    QList<State*> states;
+    QList<std::shared_ptr<State>> states;
 };
 
 // ========================= BuildUI 类 =========================
@@ -77,7 +77,7 @@ class BuildUI : public QWidget {
     Q_OBJECT   // 需要信号槽支持
 
 public:
-    BuildUI(QWidget* parent, const QList<State*>& stateList)
+    BuildUI(QWidget* parent, const QList<std::shared_ptr<State>>& stateList)
         : QWidget(parent), states(stateList) {
 
         QGridLayout* layout = new QGridLayout(this);
@@ -89,7 +89,7 @@ public:
         layout->setColumnMinimumWidth(0, 10);     // padx=10
 
         // 填充州名
-        for (State* s : states)
+        for (const auto& s : states)
             listbox->addItem(s->getStateName());
 
         // --- 创建 Entry 输入框（底部）---
@@ -150,7 +150,7 @@ protected:
             if (!text.isEmpty() && text[0].isLetterOrNumber()) {
                 char ch = text[0].toUpper().toLatin1();
                 keyPress(ch);
-                return true;   // 事件已处理
+                //return true;   // 事件已处理
             }
         }
         return QWidget::eventFilter(obj, event);
@@ -160,7 +160,7 @@ private slots:
     // 对应原 lbselect 方法
     void lbselect(int row) {
         if (row >= 0 && row < states.size()) {
-            State* state = states[row];
+            auto state = states[row];
             loadLabels(state);
         }
     }
@@ -182,7 +182,7 @@ private slots:
         }
     }
 
-    void loadLabels(State* state) {
+    void loadLabels(const std::shared_ptr<State>& state) {
         lbstate->setText(state->getStateName());
         lbcapital->setText(state->getCapital());
         lbabbrev->setText(state->getAbbrev());
@@ -190,7 +190,7 @@ private slots:
     }
 
 private:
-    QList<State*> states;
+    QList<std::shared_ptr<State>> states;
     QListWidget* listbox;
     QLineEdit* entry;
     QScrollBar* scrollBar;
@@ -214,7 +214,7 @@ int main(int argc, char* argv[]) {
 
     QWidget root;
     root.setWindowTitle("State List");
-    root.setFixedSize(300, 200);          // geometry("300x200")
+    root.setFixedSize(300, 300);          // geometry("300x200")
 
     BuildUI bdui(&root, sl.getStateList());
 
