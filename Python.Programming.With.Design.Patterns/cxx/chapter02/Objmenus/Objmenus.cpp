@@ -68,6 +68,8 @@ public:
         : root(root), label(label) {}
 
     QString getLabel() const { return label; }
+
+public slots:
     virtual void comd() {}
 
 protected:
