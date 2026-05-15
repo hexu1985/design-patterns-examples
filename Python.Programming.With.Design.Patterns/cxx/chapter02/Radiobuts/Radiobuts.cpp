@@ -7,6 +7,7 @@
 
 // ChoiceButton 继承自 QRadioButton，对应原 Python 的 Radiobutton
 class ChoiceButton : public QRadioButton {
+    Q_OBJECT    
 public:
     ChoiceButton(QWidget* parent, const QString& color, int index, QButtonGroup* /*gvar*/, QLabel* clabel)
         : QRadioButton(color, parent), clabel(clabel), color(color)
@@ -78,3 +79,6 @@ int main(int argc, char* argv[]) {
 
     return app.exec();   // 对应 root.mainloop()
 }
+
+// 需要包含 moc 生成的代码（因为 Q_OBJECT 在 cpp 文件中）
+#include "Radiobuts.moc"
