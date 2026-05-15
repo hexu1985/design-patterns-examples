@@ -10,6 +10,7 @@
 #include <QStringList>
 #include <QDir>
 #include <QDebug>
+#include <memory>
 
 const QString DATA_FILE = "States.txt";
 
@@ -51,7 +52,7 @@ public:
         while (!in.atEnd()) {
             QString line = in.readLine().trimmed();
             if (!line.isEmpty()) {
-                State* state = new State(line);
+                auto state = std::make_shared<State>(line);
                 states.append(state);
             }
         }
@@ -60,21 +61,21 @@ public:
 
     QStringList getText() const {
         QStringList list;
-        for (State* s : states)
+        for (const auto& s : states)
             list << s->toString();
         return list;
     }
 
-    QList<State*> getStateList() const { return states; }
+    const QList<std::shared_ptr<State>>& getStateList() const { return states; }
 
 private:
-    QList<State*> states;
+    QList<std::shared_ptr<State>> states;
 };
 
 // ------------------------- BuildUI 类 -------------------------
 class BuildUI : public QWidget {
 public:
-    BuildUI(QWidget* parent, const QList<State*>& stateList)
+    BuildUI(QWidget* parent, const QList<std::shared_ptr<State>>& stateList)
         : QWidget(parent), states(stateList) {
 
         QGridLayout* layout = new QGridLayout(this);
@@ -84,7 +85,7 @@ public:
         layout->addWidget(listbox, 0, 0, 4, 1);
         layout->setColumnMinimumWidth(0, 10);   // padx=10
 
-        for (State* state : states) {
+        for (const auto& state : states) {
             listbox->addItem(state->getStateName());
         }
 
@@ -92,7 +93,7 @@ public:
     }
 
 private:
-    QList<State*> states;
+    QList<std::shared_ptr<State>> states;
     QListWidget* listbox;
 };
 
