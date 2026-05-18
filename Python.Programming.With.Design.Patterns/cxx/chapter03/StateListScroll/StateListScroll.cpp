@@ -47,22 +47,25 @@ public:
         while (!in.atEnd()) {
             QString line = in.readLine().trimmed();
             if (!line.isEmpty()) {
-                states.append(new State(line));
+                auto state = std::make_shared<State>(line);
+                states.append(state);
             }
         }
         file.close();
     }
 
-    QList<State*> getStateList() const { return states; }
+    const QList<std::shared_ptr<State>>& getStateList() const { return states; }
 
 private:
-    QList<State*> states;
+    QList<std::shared_ptr<State>> states;
 };
 
 // ======================== BuildUI 类 ========================
 class BuildUI : public QWidget {
+    Q_OBJECT   // 需要信号槽支持
+
 public:
-    BuildUI(QWidget* parent, const QList<State*>& stateList)
+    BuildUI(QWidget* parent, const QList<std::shared_ptr<State>>& stateList)
         : QWidget(parent), states(stateList) {
 
         QGridLayout* layout = new QGridLayout(this);
@@ -74,7 +77,7 @@ public:
         layout->setColumnMinimumWidth(0, 10);     // padx=10
 
         // 填充州名
-        for (State* s : states)
+        for (const auto& s : states)
             listbox->addItem(s->getStateName());
 
         // ---- 右侧三个标签 ----
@@ -98,7 +101,7 @@ public:
 private slots:
     void onselect(int row) {
         if (row >= 0 && row < states.size()) {
-            State* s = states[row];
+            auto s = states[row];
             lbstate->setText(s->getStateName());
             lbabbrev->setText(s->getAbbrev());
             lbcapital->setText(s->getCapital());
@@ -106,7 +109,7 @@ private slots:
     }
 
 private:
-    QList<State*> states;
+    QList<std::shared_ptr<State>> states;
     QListWidget* listbox;
     QLabel* lbstate;
     QLabel* lbabbrev;
@@ -131,3 +134,6 @@ int main(int argc, char* argv[]) {
 
     return app.exec();                    // mainloop()
 }
+
+// 因为类中使用了 Q_OBJECT，需要在包含 moc 生成的文件
+#include "StateListScroll.moc"
