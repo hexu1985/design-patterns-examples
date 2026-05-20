@@ -34,8 +34,17 @@ add_custom_target(copy_test_datafile ALL
     DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/500free.txt
 )
 
-set(PROJECT_SOURCES)
-file(GLOB PROJECT_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp ${CMAKE_CURRENT_SOURCE_DIR}/*.hpp)
+set(PROJECT_SOURCES
+    main.cpp
+    widget.cpp
+    widget.h
+    Event.h
+    PrelimEvent.h
+    Seeding.h
+    StraightSeeding.h
+    Swimmer.h
+    TimedFinalEvent.h
+)
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(SwimFactory
