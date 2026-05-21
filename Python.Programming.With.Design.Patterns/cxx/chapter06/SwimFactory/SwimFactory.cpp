@@ -54,7 +54,9 @@ private slots:
     }
 
     void build() {
-        setFixedSize(325, 200);          // root.geometry("325x200")
+        //setFixedSize(325, 200);          // root.geometry("325x200")
+        resize(325, 200);          // ✅ 设置初始尺寸，但允许用户拉伸
+        setMinimumSize(325, 200);  // ✅ 可选：限制最小尺寸
 
         QGridLayout* layout = new QGridLayout(this);
 
@@ -70,9 +72,10 @@ private slots:
 
         // 右侧列表：显示排位后的选手
         swlist = new QListWidget(this);
+        swlist->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
         layout->addWidget(swlist, 0, 1);
         layout->setRowMinimumHeight(0, 10);        // pady=10
-        layout->setAlignment(swlist, Qt::AlignCenter);
+        //layout->setAlignment(swlist, Qt::AlignCenter);
 
         // 设置列权重（模拟 grid_columnconfigure）
         layout->setColumnStretch(0, 1);             // weight=1
