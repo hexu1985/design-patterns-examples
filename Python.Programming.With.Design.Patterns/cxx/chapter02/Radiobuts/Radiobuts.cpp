@@ -9,9 +9,10 @@
 class ChoiceButton : public QRadioButton {
     Q_OBJECT    
 public:
-    ChoiceButton(QWidget* parent, const QString& color, int index, QButtonGroup* /*gvar*/, QLabel* clabel)
+    ChoiceButton(QWidget* parent, const QString& color, int index, QButtonGroup* group, QLabel* clabel)
         : QRadioButton(color, parent), clabel(clabel), color(color)
     {
+        group->addButton(this);
         // 设置内边距（Qt 中用样式表模拟 padx=20）
         setStyleSheet("QRadioButton { padding-left: 20px; }");
         // 连接 clicked 信号到自定义槽
