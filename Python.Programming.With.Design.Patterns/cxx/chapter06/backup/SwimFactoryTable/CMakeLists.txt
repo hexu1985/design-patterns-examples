@@ -14,15 +14,6 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(QT NAMES Qt6 Qt5 COMPONENTS Widgets REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets REQUIRED)
 
-### asan
-option(ENABLE_ASAN "Enable AddressSanitizer" ON)
-
-if(ENABLE_ASAN)
-    message(STATUS "AddressSanitizer enabled")
-    add_compile_options(-g -Wall -fsanitize=address -fno-omit-frame-pointer)
-    add_link_options(-fsanitize=address)
-endif()
-
 ### test data
 set(TEST_DATAFILES 100free.txt 500free.txt)
 
@@ -43,8 +34,17 @@ add_custom_target(copy_test_datafile ALL
     DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/500free.txt
 )
 
-set(PROJECT_SOURCES)
-file(GLOB PROJECT_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp ${CMAKE_CURRENT_SOURCE_DIR}/*.hpp)
+set(PROJECT_SOURCES
+    main.cpp
+    widget.cpp
+    widget.h
+    Event.h
+    PrelimEvent.h
+    Seeding.h
+    StraightSeeding.h
+    Swimmer.h
+    TimedFinalEvent.h
+)
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(SwimFactoryTable
