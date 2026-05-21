@@ -5,9 +5,6 @@
 
 #include "SwimClasses.hpp"
 
-// 假设这些类已在 SwimClasses.h 中定义，这里为完整性提供声明
-// 实际使用时应该 #include "SwimClasses.h"
-
 // -------------------------- Builder 类 --------------------------
 class Builder {
 public:
