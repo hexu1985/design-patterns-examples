@@ -6,6 +6,25 @@
 #include <algorithm>
 #include <cmath>
 
+std::vector<std::string> split(const std::string& s, char c=' ') {
+    std::vector<std::string> v;
+    std::string::size_type i = 0;
+    std::string::size_type j = s.find(c);
+
+    while (j != std::string::npos) {
+        v.push_back(s.substr(i, j-i));
+        if (c == ' ') {
+            while (s[j+1] == ' ') ++j;
+        }
+        i = ++j;
+        j = s.find(c, j);
+
+        if (j == std::string::npos)
+            v.push_back(s.substr(i, s.length( )));
+    }
+    return v;
+}
+
 // -------------------------- Swimmer 类 --------------------------
 class Swimmer {
 public:
@@ -19,14 +38,7 @@ public:
     int heat;
 
     Swimmer(const std::string& dataline) {
-        std::vector<std::string> sarray;
-        std::string line = dataline;
-        size_t pos = 0;
-        while ((pos = line.find(' ')) != std::string::npos) {
-            sarray.push_back(line.substr(0, pos));
-            line.erase(0, pos + 1);
-        }
-        sarray.push_back(line);
+        std::vector<std::string> sarray = split(dataline);
 
         frname = sarray[1];
         lname = sarray[2];
@@ -84,34 +96,6 @@ public:
     virtual bool isPrelim() = 0;
     virtual bool isFinal() = 0;
     virtual bool isTimedFinal() = 0;
-};
-
-// -------------------------- PrelimEvent --------------------------
-class PrelimEvent : public Event {
-public:
-    PrelimEvent(const std::string& filename, int lanes) : Event(filename, lanes) {}
-
-    Seeding* getSeeding() override {
-        return new CircleSeeding(swimmers, numLanes);
-    }
-
-    bool isPrelim() override { return true; }
-    bool isFinal() override { return false; }
-    bool isTimedFinal() override { return false; }
-};
-
-// -------------------------- TimedFinalEvent --------------------------
-class TimedFinalEvent : public Event {
-public:
-    TimedFinalEvent(const std::string& filename, int lanes) : Event(filename, lanes) {}
-
-    Seeding* getSeeding() override {
-        return new StraightSeeding(swimmers, numLanes);
-    }
-
-    bool isPrelim() override { return false; }
-    bool isFinal() override { return false; }
-    bool isTimedFinal() override { return true; }
 };
 
 // -------------------------- StraightSeeding --------------------------
@@ -238,5 +222,33 @@ public:
             }
         }
     }
+};
+
+// -------------------------- PrelimEvent --------------------------
+class PrelimEvent : public Event {
+public:
+    PrelimEvent(const std::string& filename, int lanes) : Event(filename, lanes) {}
+
+    Seeding* getSeeding() override {
+        return new CircleSeeding(swimmers, numLanes);
+    }
+
+    bool isPrelim() override { return true; }
+    bool isFinal() override { return false; }
+    bool isTimedFinal() override { return false; }
+};
+
+// -------------------------- TimedFinalEvent --------------------------
+class TimedFinalEvent : public Event {
+public:
+    TimedFinalEvent(const std::string& filename, int lanes) : Event(filename, lanes) {}
+
+    Seeding* getSeeding() override {
+        return new StraightSeeding(swimmers, numLanes);
+    }
+
+    bool isPrelim() override { return false; }
+    bool isFinal() override { return false; }
+    bool isTimedFinal() override { return true; }
 };
 

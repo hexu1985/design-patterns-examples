@@ -9,6 +9,15 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 message( STATUS "CMAKE_PROJECT_NAME = ${CMAKE_PROJECT_NAME}" )
 message( STATUS "PROJECT_SOURCE_DIR = ${PROJECT_SOURCE_DIR}" )
 
+### asan
+option(ENABLE_ASAN "Enable AddressSanitizer" ON)
+
+if(ENABLE_ASAN)
+    message(STATUS "AddressSanitizer enabled")
+    add_compile_options(-g -Wall -fsanitize=address -fno-omit-frame-pointer)
+    add_link_options(-fsanitize=address)
+endif()
+
 ### test data
 set(TEST_DATAFILES 100free.txt 500free.txt)
 
