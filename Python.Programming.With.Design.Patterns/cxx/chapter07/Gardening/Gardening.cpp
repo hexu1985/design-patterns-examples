@@ -104,10 +104,11 @@ class ChoiceButton : public QRadioButton {
     Q_OBJECT
 public:
     ChoiceButton(QWidget* parent, const QString& name, int index,
-                 Garden* garden, Gardener* gardener, QButtonGroup* gvar)
+                 Garden* garden, Gardener* gardener, QButtonGroup* group)
         : QRadioButton(name, parent), name(name), index(index),
-          garden(garden), gardener(gardener), gvar(gvar) {
+          garden(garden), gardener(gardener), group(group) {
         
+        group->addButton(this, index);
         connect(this, &QRadioButton::toggled, this, &ChoiceButton::onToggled);
     }
 
@@ -125,7 +126,7 @@ private:
     int index;
     Garden* garden;
     Gardener* gardener;
-    QButtonGroup* gvar;
+    QButtonGroup* group;
 };
 
 // -------------------------- 自定义画布 Canvas --------------------------
