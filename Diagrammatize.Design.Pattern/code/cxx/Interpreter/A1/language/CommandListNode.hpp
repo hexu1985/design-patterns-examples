@@ -13,6 +13,7 @@ public:
     ~CommandListNode() override;
     void parse(Context& context) override;
     std::string toString() override;
+    void execute() override;
 
 private:
     std::vector<std::unique_ptr<Node>> list_;

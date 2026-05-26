@@ -11,3 +11,7 @@ void ProgramNode::parse(Context& context) {
 std::string ProgramNode::toString() {
     return "[program " + commandListNode_->toString() + "]";
 }
+
+void ProgramNode::execute() {
+    commandListNode_->execute();
+}

@@ -64,3 +64,14 @@ int Context::currentNumber() {
         throw ParseException("Warning: Number out of range: " + currentToken_);
     }
 }
+
+void Context::setExecutorFactory(ExecutorFactory* factory) {
+    factory_ = factory;
+}
+
+std::unique_ptr<Executor> Context::createExecutor(const std::string& name) {
+    if (!factory_) {
+        throw std::runtime_error("ExecutorFactory not set");
+    }
+    return factory_->createExecutor(name);
+}

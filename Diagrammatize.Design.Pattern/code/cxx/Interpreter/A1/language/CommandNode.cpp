@@ -17,3 +17,7 @@ void CommandNode::parse(Context& context) {
 std::string CommandNode::toString() {
     return node_->toString();
 }
+
+void CommandNode::execute() {
+    node_->execute();
+}

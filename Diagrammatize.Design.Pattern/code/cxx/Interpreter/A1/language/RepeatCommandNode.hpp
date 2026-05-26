@@ -11,6 +11,7 @@ public:
     ~RepeatCommandNode() override;
     void parse(Context& context) override;
     std::string toString() override;
+    void execute() override;
 
 private:
     int number_;

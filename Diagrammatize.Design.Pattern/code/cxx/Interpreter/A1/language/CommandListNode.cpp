@@ -36,3 +36,9 @@ std::string CommandListNode::toString() {
 
     return ss.str();
 }
+
+void CommandListNode::execute() {
+    for (auto& node: list_) {
+        node->execute();
+    }
+}

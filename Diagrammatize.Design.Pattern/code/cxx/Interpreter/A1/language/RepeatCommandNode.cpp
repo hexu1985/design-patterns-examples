@@ -19,3 +19,9 @@ std::string RepeatCommandNode::toString() {
         << commandListNode_->toString() << "]";
     return ss.str();
 }
+
+void RepeatCommandNode::execute() {
+    for (int i = 0; i < number_; i++) {
+        commandListNode_->execute();
+    }
+}

@@ -12,6 +12,7 @@ public:
     ~CommandNode() override;
     void parse(Context& context) override;
     std::string toString() override;
+    void execute() override;
 
 private:
     std::unique_ptr<Node> node_;

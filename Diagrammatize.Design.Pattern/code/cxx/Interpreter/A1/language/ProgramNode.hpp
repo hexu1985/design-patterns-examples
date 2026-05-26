@@ -11,6 +11,7 @@ public:
     ~ProgramNode() override;
     void parse(Context& context) override;
     std::string toString() override;
+    void execute() override;
 
 private:
     std::unique_ptr<Node> commandListNode_;
