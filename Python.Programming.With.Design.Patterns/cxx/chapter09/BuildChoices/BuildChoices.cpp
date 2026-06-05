@@ -1,4 +1,3 @@
-// main.cpp
 #include <QApplication>
 #include <QWidget>
 #include <QVBoxLayout>
@@ -11,17 +10,15 @@
 #include <QListWidgetItem>
 #include <QStringList>
 #include <QVector>
-#include <QDebug>
 
 // Abstract base class that the listbox and checkbox choice widgets are derived from
 class MultiChoice : public QWidget {
 protected:
     QStringList choices;
-    QWidget* container;
 
 public:
     MultiChoice(QWidget* frame, const QStringList& choiceList) 
-        : QWidget(frame), choices(choiceList), container(frame) {
+        : QWidget(frame), choices(choiceList) {
     }
 
     virtual ~MultiChoice() {}
@@ -30,19 +27,20 @@ public:
     virtual void makeUI() = 0;  // Fill a widget with components
     virtual QStringList getSelected() = 0;  // Get list of items
 
-    // Clears out the components of the container
+    // Clears out the components
     void clearAll() {
-        // Remove all child widgets from container
-        QList<QWidget*> children = container->findChildren<QWidget*>();
+        // 删除所有子 widget
+        QList<QWidget*> children = this->findChildren<QWidget*>();
         for (QWidget* child : children) {
-            if (child->parent() == container) {
-                delete child;
+            if (child->parent() == this) {
+                child->deleteLater();
             }
         }
         
-        // Also delete the layout if exists
-        if (container->layout()) {
-            delete container->layout();
+        // 删除布局
+        QLayout* oldLayout = this->layout();
+        if (oldLayout) {
+            delete oldLayout;
         }
     }
 };
@@ -63,26 +61,21 @@ protected:
 };
 
 // Pops up message box showing selected securities
+class BuildUI;  // 前向声明
+
 class ShowButton : public DButton {
     Q_OBJECT
 
 private:
-    class BuildUI* bldr;
+    BuildUI* bldr;
 
 public:
-    ShowButton(class BuildUI* builder, QWidget* root)
+    ShowButton(BuildUI* builder, QWidget* root)
         : DButton(root, "Show"), bldr(builder) {
     }
 
 protected:
-    void comd() override {
-        QStringList list = bldr->getSelected();
-        QString text;
-        for (const QString& stock : list) {
-            text += stock + "\n";
-        }
-        QMessageBox::information(nullptr, "Selected securities", text);
-    }
+    void comd() override;
 };
 
 // ListboxChoice class
@@ -99,11 +92,11 @@ public:
     void makeUI() override {
         clearAll();
         
-        QVBoxLayout* layout = new QVBoxLayout(container);
-        container->setLayout(layout);
+        QVBoxLayout* layout = new QVBoxLayout(this);
+        this->setLayout(layout);
         
         // Create a list box
-        list = new QListWidget(container);
+        list = new QListWidget(this);
         list->setSelectionMode(QAbstractItemView::MultiSelection);
         layout->addWidget(list);
         
@@ -116,9 +109,11 @@ public:
     // Returns a list of the selected elements
     QStringList getSelected() override {
         QStringList selist;
-        QList<QListWidgetItem*> selected = list->selectedItems();
-        for (QListWidgetItem* item : selected) {
-            selist.append(item->text());
+        if (list) {
+            QList<QListWidgetItem*> selected = list->selectedItems();
+            for (QListWidgetItem* item : selected) {
+                selist.append(item->text());
+            }
         }
         return selist;
     }
@@ -159,12 +154,12 @@ public:
         boxes.clear();
         clearAll();
         
-        QGridLayout* layout = new QGridLayout(container);
-        container->setLayout(layout);
+        QGridLayout* layout = new QGridLayout(this);
+        this->setLayout(layout);
         
         int r = 0;
         for (const QString& name : choices) {
-            Checkbox* cb = new Checkbox(container, name);
+            Checkbox* cb = new Checkbox(this, name);
             boxes.append(cb);
             layout->addWidget(cb, r, 0, Qt::AlignLeft);
             r++;
@@ -175,7 +170,7 @@ public:
     QStringList getSelected() override {
         QStringList items;
         for (Checkbox* b : boxes) {
-            if (b->isChecked()) {
+            if (b && b->isChecked()) {
                 items.append(b->getText());
             }
         }
@@ -239,6 +234,14 @@ public:
         root->setWindowTitle("Wealth Builder");
     }
     
+    ~BuildUI() {
+        // 清理 securities
+        for (Securities* sec : seclist) {
+            delete sec;
+        }
+        seclist.clear();
+    }
+    
     // Create the UI
     void build() {
         // Create securities list
@@ -262,7 +265,8 @@ public:
         
         // Fill left list box with security types (row=0, column=0)
         QWidget* lframe = new QWidget(root);
-        lframe->setLayout(new QVBoxLayout());
+        QVBoxLayout* lframeLayout = new QVBoxLayout(lframe);
+        lframe->setLayout(lframeLayout);
         gridLayout->addWidget(lframe, 0, 0);
         
         // Create left listbox
@@ -282,13 +286,16 @@ public:
         // Right frame (row=0, column=1)
         rframe = new QWidget(root);
         rframe->setObjectName("right");
+        QVBoxLayout* rframeLayout = new QVBoxLayout(rframe);
+        rframe->setLayout(rframeLayout);
         gridLayout->addWidget(rframe, 0, 1);
         
         // Show button (row=1, column=0, columnSpan=2)
         showbutton = new ShowButton(this, root);
-        gridLayout->addWidget(showbutton, 1, 0, 1, 2);  // row=1, col=0, rowSpan=1, colSpan=2
+        gridLayout->addWidget(showbutton, 1, 0, 1, 2);
     }
     
+public slots:
     // Callback when left list box is selected
     void lbselect() {
         QList<QListWidgetItem*> selected = leftList->selectedItems();
@@ -298,27 +305,22 @@ public:
         Securities* securities = seclist[i];
         
         ChoiceFactory cf;
-        if (cui) {
-            delete cui;
-        }
-        cui = cf.getChoiceUI(securities->getList(), rframe);
-        cui->makeUI();  // Creates right hand panel
         
-        // 将cui添加到rframe中
-        QLayout* layout = rframe->layout();
-        if (!layout) {
-            layout = new QVBoxLayout(rframe);
-            rframe->setLayout(layout);
-        } else {
-            // 清除之前的widget
-            QLayoutItem* item;
-            while ((item = layout->takeAt(0)) != nullptr) {
-                if (item->widget())
-                    item->widget()->deleteLater();
-                delete item;
-            }
+        // 删除旧的 cui
+        if (cui) {
+            cui->deleteLater();
+            cui = nullptr;
         }
-        layout->addWidget(cui);
+        
+        // 创建新的 cui
+        cui = cf.getChoiceUI(securities->getList(), rframe);
+        cui->makeUI();
+        
+        // 添加到 rframe
+        QLayout* layout = rframe->layout();
+        if (layout) {
+            layout->addWidget(cui);
+        }
     }
     
     // Returns list of selected items no matter what display
@@ -329,6 +331,20 @@ public:
         return QStringList();
     }
 };
+
+void ShowButton::comd() {
+    if (bldr) {
+        QStringList list = bldr->getSelected();
+        QString text;
+        for (const QString& stock : list) {
+            text += stock + "\n";
+        }
+        if (text.isEmpty()) {
+            text = "No items selected";
+        }
+        QMessageBox::information(nullptr, "Selected securities", text);
+    }
+}
 
 // Main function
 int main(int argc, char* argv[]) {
