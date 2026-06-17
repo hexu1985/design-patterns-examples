@@ -4,14 +4,19 @@
 using namespace std;
 
 struct GraphicObject {
-    virtual void draw() = 0;
+    virtual void draw(int depth) = 0;
 };
 
 /**
  * This funges as the individual (scalar) object
  */
 struct Circle : GraphicObject {
-    void draw() override { cout << "Circle" << endl; }
+    void draw(int depth) override { 
+        for (int i = 0; i < depth; i++) {
+            std::cout << "  ";
+        }
+        cout << "- Circle" << endl; 
+    }
 };
 
 /**
@@ -23,10 +28,13 @@ struct Group : GraphicObject {
     vector<GraphicObject *> objects;
 
     Group(const string &name) : name(name) {}
-    void draw() override {
-        cout << "Group " << name.c_str() << " contains: " << endl;
+    void draw(int depth) override {
+        for (int i = 0; i < depth; i++) {
+            std::cout << "  ";
+        }
+        cout << "- Group " << name.c_str() << " contains: " << endl;
         for (auto &&o : objects) {
-            o->draw();
+            o->draw(depth+1);
         }
     }
 };
@@ -44,5 +52,5 @@ int main() {
     // GraphicObjects. This is the idea behind composites basically
     root.objects.push_back(&subgroup);
 
-    root.draw();
+    root.draw(0);
 }
