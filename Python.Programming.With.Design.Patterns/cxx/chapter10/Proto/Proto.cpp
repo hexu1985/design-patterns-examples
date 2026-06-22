@@ -189,7 +189,7 @@ public:
         file.close();
     }
 
-    void refreshLeft() {
+    void reloadLeft() {
         readFile();
         swmrs = sortUpwards();
         fillList(leftList, swmrs);
@@ -233,7 +233,7 @@ public:
         return swmrs;
     }
 
-    void restoreLeft() {
+    void refreshLeft() {
         leftList->clear();
         fillList(leftList, swmrs);
     }
@@ -269,7 +269,7 @@ private:
 };
 
 void ReloadButton::comd() {
-    bldr->refreshLeft();
+    bldr->reloadLeft();
 }
 
 void CopyButton::comd() {
@@ -277,7 +277,7 @@ void CopyButton::comd() {
 }
 
 void RefreshButton::comd() {
-    bldr->restoreLeft();
+    bldr->refreshLeft();
 }
 
 void CloneButton::comd() {
