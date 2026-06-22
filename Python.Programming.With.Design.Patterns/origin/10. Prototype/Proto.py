@@ -20,7 +20,7 @@ class ReloadButton(DButton):
         super().__init__(root, text="Reload")
         self.bldr = bldr
     def comd(self):
-        self.bldr.refreshLeft()
+        self.bldr.reloadLeft()
 
 class CopyButton(DButton):
     def __init__(self,root,  bldr, **kwargs):
@@ -41,7 +41,7 @@ class RefreshButton(DButton):
         super().__init__(root, text="<--Refresh")
         self.bldr = bldr
     def comd(self):
-        self.bldr.restoreLeft()
+        self.bldr.refreshLeft()
 
 
 # Swimmer object holds all data on one swimmer
@@ -110,7 +110,7 @@ class BuildUI():
             self.swimmers.append(sw)
         f.close()
 
-    def refreshLeft(self):
+    def reloadLeft(self):
         self.readFile()
         self.swmrs = self.sortUpwards()
         self.fillList(self.leftList, self.swmrs)
@@ -144,7 +144,7 @@ class BuildUI():
                     swmrs[j] = swtemp
         return swmrs
 
-    def restoreLeft(self):
+    def refreshLeft(self):
         self.leftList.delete(0, END)
         self.fillList(self.leftList, self.swmrs)
 
