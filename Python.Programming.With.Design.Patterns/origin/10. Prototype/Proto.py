@@ -2,7 +2,8 @@ import tkinter as tk
 from tkinter import *
 from tkinter import messagebox
 from tkinter import ttk
-from Lib import copy
+#from Lib import copy
+import copy
 import os, sys
 
 # derived class from Button that contains empty comd function
@@ -14,7 +15,7 @@ class DButton(Button):
     # abstract method to be called by children
     def comd(self):
         pass
-class RefreshButton(DButton):
+class ReloadButton(DButton):
     def __init__(self,root,  bldr, **kwargs):
         super().__init__(root, text="Reload")
         self.bldr = bldr
@@ -35,7 +36,7 @@ class CloneButton(DButton):
     def comd(self):
         self.bldr.clone()
 
-class ReloadButton(DButton):
+class RefreshButton(DButton):
     def __init__(self,root,  bldr, **kwargs):
         super().__init__(root, text="<--Refresh")
         self.bldr = bldr
@@ -86,10 +87,10 @@ class BuildUI():
         self.cloneButton.grid(row=1, column=1)
         self.copyButton = CopyButton(root, self)
         self.copyButton.grid(row=2, column=1)
-        self.reloadButton = ReloadButton(root, self)
-        self.reloadButton.grid(row=3, column=1)
         self.refreshButton = RefreshButton(root, self)
-        self.refreshButton.grid(row=4, column=1)
+        self.refreshButton.grid(row=3, column=1)
+        self.reloadButton = ReloadButton(root, self)
+        self.reloadButton.grid(row=4, column=1)
 
         self.rightlist = Listbox(width=25)
         self.rightlist.grid(row=0, column=2, rowspan=4, sticky="E")
