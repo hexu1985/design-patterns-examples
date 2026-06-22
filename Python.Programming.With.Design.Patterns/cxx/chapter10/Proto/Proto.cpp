@@ -68,11 +68,11 @@ private slots:
     virtual void comd() = 0;
 };
 
-class RefreshButton : public DButton {
+class ReloadButton : public DButton {
     Q_OBJECT
 
 public:
-    RefreshButton(QWidget* parent, BuildUI* bldr) : DButton(parent), bldr(bldr) {
+    ReloadButton(QWidget* parent, BuildUI* bldr) : DButton(parent), bldr(bldr) {
         setText("Reload");
     }
 
@@ -110,11 +110,11 @@ private:
     BuildUI* bldr;
 };
 
-class ReloadButton : public DButton {
+class RefreshButton : public DButton {
     Q_OBJECT
 
 public:
-    ReloadButton(QWidget* parent, BuildUI* bldr) : DButton(parent), bldr(bldr) {
+    RefreshButton(QWidget* parent, BuildUI* bldr) : DButton(parent), bldr(bldr) {
         setText("<--Refresh");
     }
 
@@ -151,11 +151,11 @@ public:
         copyButton = new CopyButton(this, this);
         layout->addWidget(copyButton, 2, 1);
         
-        reloadButton = new ReloadButton(this, this);
-        layout->addWidget(reloadButton, 3, 1);
-        
         refreshButton = new RefreshButton(this, this);
-        layout->addWidget(refreshButton, 4, 1);
+        layout->addWidget(refreshButton, 3, 1);
+        
+        reloadButton = new ReloadButton(this, this);
+        layout->addWidget(reloadButton, 4, 1);
         
         rightList = new QListWidget();
         rightList->setMaximumWidth(200);
@@ -211,8 +211,8 @@ public:
     }
 
     void shallowCopy() {
-        QVector<Swimmer> sw = swmrs; // copies the pointers not the data
-        sw = sbySex(sw);
+        QVector<Swimmer>& swmrsCopy = swmrs;
+        QVector<Swimmer> sw = sbySex(swmrsCopy);
         fillList(rightList, sw);
     }
 
@@ -261,14 +261,14 @@ private:
     QListWidget* rightList;
     CloneButton* cloneButton;
     CopyButton* copyButton;
-    ReloadButton* reloadButton;
     RefreshButton* refreshButton;
+    ReloadButton* reloadButton;
     
     QVector<Swimmer> swimmers;
     QVector<Swimmer> swmrs;
 };
 
-void RefreshButton::comd() {
+void ReloadButton::comd() {
     bldr->refreshLeft();
 }
 
@@ -276,7 +276,7 @@ void CopyButton::comd() {
     bldr->shallowCopy();
 }
 
-void ReloadButton::comd() {
+void RefreshButton::comd() {
     bldr->restoreLeft();
 }
 
