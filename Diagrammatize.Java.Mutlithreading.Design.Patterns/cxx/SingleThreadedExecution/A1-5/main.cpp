@@ -10,18 +10,18 @@ int main() {
     
     for (int trial = 0; true; ++trial) {
         SecurityGate gate;
-        std::vector<CrackerThread> threads;
+        std::vector<std::shared_ptr<CrackerThread>> threads;
         
         // 启动5个CrackerThread
         for (int i = 0; i < 5; ++i) {
-            CrackerThread cracker(gate);
-            cracker.start();
-            threads.push_back(std::move(cracker));
+            auto cracker = std::make_shared<CrackerThread>(gate);
+            threads.push_back(cracker);
+            cracker->start();
         }
         
         // 等待所有线程终止
         for (auto& t : threads) {
-            t.join();
+            t->join();
         }
         
         // 确认
