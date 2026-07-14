@@ -5,6 +5,8 @@
 #include <iostream>
 #include <string>
 
+#include "Tool.hpp"
+
 class EaterThread {
 private:
     std::string name;
