@@ -4,14 +4,16 @@
 #include <vector>
 #include <thread>
 #include <chrono>
+#include <mutex>
 
 // 主函数
 int main() {
     std::vector<int> list;
+    std::mutex mutex;
     
     // 创建线程对象
-    WriterThread writer(list);
-    ReaderThread reader(list);
+    WriterThread writer(list, mutex);
+    ReaderThread reader(list, mutex);
     
     // 启动线程
     writer.start();
