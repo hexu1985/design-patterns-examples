@@ -2,17 +2,18 @@
 
 #include <atomic>
 #include <thread>
-#include <vector>
 #include <iostream>
+
+#include "CopyOnWriteArrayList.hpp"
 
 class ReaderThread {
 private:
-    const std::vector<int>& list;  // 使用引用保持与Java中final类似的效果
+    CopyOnWriteArrayList& list;
     std::thread thread;
     std::atomic<bool> running{true};
 
 public:
-    ReaderThread(const std::vector<int>& list) : list(list) {}
+    ReaderThread(CopyOnWriteArrayList& list) : list(list) {}
 
     ~ReaderThread() {
         running = false;
@@ -23,7 +24,8 @@ public:
 
     void run() {
         while (true) {
-            for (int n : list) {
+            auto snapshot = list.getSnapshot();
+            for (int n : *snapshot) {
                 std::cout << n << std::endl;
             }
         }

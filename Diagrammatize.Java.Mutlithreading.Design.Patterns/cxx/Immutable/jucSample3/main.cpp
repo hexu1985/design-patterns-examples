@@ -1,3 +1,4 @@
+#include "CopyOnWriteArrayList.hpp"
 #include "ReaderThread.hpp"
 #include "WriterThread.hpp"
 
@@ -7,7 +8,7 @@
 
 // 主函数
 int main() {
-    std::vector<int> list;
+    CopyOnWriteArrayList list;
     
     // 创建线程对象
     WriterThread writer(list);

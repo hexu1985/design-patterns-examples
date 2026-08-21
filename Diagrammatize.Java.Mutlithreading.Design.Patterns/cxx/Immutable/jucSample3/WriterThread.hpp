@@ -2,16 +2,17 @@
 
 #include <atomic>
 #include <thread>
-#include <vector>
+
+#include "CopyOnWriteArrayList.hpp"
 
 class WriterThread {
 private:
-    std::vector<int>& list;  // 使用引用，允许修改
+    CopyOnWriteArrayList& list;
     std::thread thread;
     std::atomic<bool> running{true};
     
 public:
-    WriterThread(std::vector<int>& list): list(list) {}
+    WriterThread(CopyOnWriteArrayList& list): list(list) {}
     
     ~WriterThread() {
         running = false;
@@ -22,8 +23,8 @@ public:
 
     void run() {
         for (int i = 0; true; i++) {
-            list.push_back(i);
-            list.erase(list.begin());  // 移除第一个元素
+            list.add(i);
+            list.remove(0);  // 移除第一个元素
         }
     }
 
