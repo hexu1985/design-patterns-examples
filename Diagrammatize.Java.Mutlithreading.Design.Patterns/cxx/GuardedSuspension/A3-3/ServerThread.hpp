@@ -2,6 +2,7 @@
 
 #include "Request.hpp"
 #include "RequestQueue.hpp"
+#include "thread_name.hpp"
 
 #include <thread>
 #include <random>
@@ -25,6 +26,7 @@ public:
     }
     
     void run() {
+        current_thread::set_thread_name(threadName);
         for (int i = 0; i < 100; i++) {
             Request request = requestQueue.getRequest();
             std::cout << threadName << " handles  " << request.toString() << std::endl;
