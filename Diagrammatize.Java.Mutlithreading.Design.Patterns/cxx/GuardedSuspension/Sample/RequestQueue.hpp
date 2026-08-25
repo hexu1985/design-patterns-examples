@@ -16,17 +16,17 @@ private:
 public:
     Request getRequest() {
         std::unique_lock<std::mutex> lock(mtx);
-        cv.wait(lock, [this]() { return !queue.empty(); });
+        while (queue.empty()) {
+            cv.wait(lock);
+        }
         Request request = queue.front();
         queue.pop();
         return request;
     }
     
     void putRequest(const Request& request) {
-        {
-            std::lock_guard<std::mutex> lock(mtx);
-            queue.push(request);
-        }
+        std::lock_guard<std::mutex> lock(mtx);
+        queue.push(request);
         cv.notify_all();
     }
 };
