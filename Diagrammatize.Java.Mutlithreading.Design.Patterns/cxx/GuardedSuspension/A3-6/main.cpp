@@ -12,5 +12,13 @@ int main() {
     client.start();
     server.start();
     
+    // 等待约10秒
+    std::this_thread::sleep_for(std::chrono::seconds(10));
+
+    // 调用interrupt方法
+    std::cout << "***** calling interrupt *****" << std::endl;
+    client.interrupt();
+    server.interrupt();
+
     return 0;
 }

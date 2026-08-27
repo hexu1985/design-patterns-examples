@@ -15,6 +15,7 @@ private:
     std::string threadName;
     std::thread thread;
     std::mt19937 random;
+    std::atomic<bool> stopRequested{false};
     
 public:
     ServerThread(RequestQueue& requestQueue, const std::string& name, long seed)
@@ -25,15 +26,23 @@ public:
     }
     
     void run() {
-        for (int i = 0; i < 100; i++) {
-            Request request = requestQueue.getRequest();
-            std::cout << threadName << " handles  " << request.toString() << std::endl;
-            
-            std::uniform_int_distribution<int> dist(0, 999);
-            int sleepTime = dist(random);
-            std::this_thread::sleep_for(std::chrono::milliseconds(sleepTime));
+        try {
+            for (int i = 0; i < 10000 && !stopRequested; i++) {
+                Request request = requestQueue.getRequest();
+                std::cout << threadName << " handles  " << request.toString() << std::endl;
+
+                std::uniform_int_distribution<int> dist(0, 999);
+                int sleepTime = dist(random);
+                std::this_thread::sleep_for(std::chrono::milliseconds(sleepTime));
+            }
+        } catch (const InterruptedException&) {
         }
     }
+    
+    void interrupt() {
+        stopRequested = true;
+        requestQueue.interrupt();
+    } 
     
     void start() {
         thread = std::thread([this]() { this->run(); });
