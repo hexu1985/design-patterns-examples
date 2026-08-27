@@ -27,7 +27,7 @@ public:
     
     void run() {
         try {
-            for (int i = 0; i < 10000 && !stopRequested; i++) {
+            for (int i = 0; i < 100 && !stopRequested; i++) {
                 Request request = requestQueue.getRequest();
                 std::cout << threadName << " handles  " << request.toString() << std::endl;
 
