@@ -2,7 +2,6 @@
 
 #include "Request.hpp"
 #include "RequestQueue.hpp"
-#include "thread_name.hpp"
 
 #include <string>
 #include <thread>
@@ -24,7 +23,6 @@ public:
     }
 
     void run() {
-        current_thread::set_thread_name(name);
         std::cout << name << ":BEGIN" << std::endl;
         for (int i = 0; i < 20; i++) {
             // 接收对方的请求
