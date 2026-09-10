@@ -3,8 +3,6 @@
 #include "Request.hpp"
 #include "threadsafe_queue.hpp"
 
-#include <memory>
-
 class RequestQueue {
 private:
     threadsafe_queue<Request> queue; 

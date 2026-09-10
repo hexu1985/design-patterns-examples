@@ -6,6 +6,7 @@
 #include <chrono>
 #include <thread>
 
+#include "Request.hpp"
 #include "LivenessException.hpp"
 #include "thread_name.hpp"
 
