@@ -7,6 +7,8 @@
 #include <condition_variable>
 #include <thread>
 
+#include "thread_name.hpp"
+
 class Table {
 public:
     explicit Table(int count)
@@ -15,7 +17,7 @@ public:
     // 放置蛋糕
     void put(const std::string& cake) {
         std::unique_lock<std::mutex> lock(mutex_);
-        std::cout << std::this_thread::get_id() << " puts " << cake << std::endl;
+        std::cout << current_thread::get_thread_name() << " puts " << cake << std::endl;
 
         while (count_ >= static_cast<int>(buffer_.size())) {
             not_empty_or_full_.wait(lock);
@@ -40,7 +42,7 @@ public:
         count_--;
         not_empty_or_full_.notify_all();
 
-        std::cout << std::this_thread::get_id() << " takes " << cake << std::endl;
+        std::cout << current_thread::get_thread_name() << " takes " << cake << std::endl;
         return cake;
     }
 
