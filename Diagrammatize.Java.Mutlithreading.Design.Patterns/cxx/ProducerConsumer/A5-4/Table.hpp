@@ -20,7 +20,9 @@ public:
         std::cout << current_thread::get_thread_name() << " puts " << cake << std::endl;
 
         while (count_ >= static_cast<int>(buffer_.size())) {
+            std::cout << current_thread::get_thread_name() << " wait BEGIN" << std::endl;
             not_empty_or_full_.wait(lock);
+            std::cout << current_thread::get_thread_name() << " wait END" << std::endl;
         }
 
         buffer_[tail_] = cake;
@@ -34,7 +36,9 @@ public:
         std::unique_lock<std::mutex> lock(mutex_);
 
         while (count_ <= 0) {
+            std::cout << current_thread::get_thread_name() << " wait BEGIN" << std::endl;
             not_empty_or_full_.wait(lock);
+            std::cout << current_thread::get_thread_name() << " wait END" << std::endl;
         }
 
         std::string cake = buffer_[head_];
