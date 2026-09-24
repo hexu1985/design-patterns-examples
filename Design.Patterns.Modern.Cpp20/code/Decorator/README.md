@@ -2,4 +2,5 @@
 
 - [9.2 动态装饰器](dynamic_decorator)
 - [9.3 静态装饰器](static_decorator)
+- [9.4 函数装饰器](functional_decorator)
 
